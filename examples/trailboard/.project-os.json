@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "project": {
+    "name": "Trailboard",
+    "language": "English",
+    "time_zone": "UTC"
+  },
+  "profile": "lean",
+  "budget": {
+    "max_active_workers": 1,
+    "usage": {
+      "short_window_yellow_percent": 50,
+      "short_window_red_percent": 70,
+      "short_window_stop_percent": 85,
+      "weekly_priority_only_percent": 80,
+      "weekly_stop_percent": 90,
+      "reserve_percent": 10,
+      "observation_max_age_minutes": 30
+    },
+    "context_save_percent": 50,
+    "context_pause_percent": 70
+  },
+  "models": {
+    "economy": {
+      "selector": "inherit",
+      "effort": "low"
+    },
+    "standard": {
+      "selector": "inherit",
+      "effort": "medium"
+    },
+    "deep": {
+      "selector": "inherit",
+      "effort": "high"
+    },
+    "review": {
+      "selector": "inherit",
+      "effort": "high"
+    }
+  },
+  "capabilities": {
+    "mode": "manual",
+    "verified_tools": []
+  },
+  "advanced_review": {
+    "enabled": false,
+    "required_before_final_rules": false,
+    "exclusive": true
+  },
+  "repositories": [
+    {
+      "id": "catalog",
+      "path": "repos/catalog",
+      "type": "cli",
+      "owner": "Catalog Developer",
+      "branch": "none (local folder mode)",
+      "test_command": "node --test catalog.test.mjs",
+      "smoke_command": "node catalog.mjs",
+      "push_deploys": false,
+      "external": false
+    },
+    {
+      "id": "handbook",
+      "path": "repos/handbook",
+      "type": "docs",
+      "owner": "Handbook Developer",
+      "branch": "none (local folder mode)",
+      "test_command": "manual Markdown and command review",
+      "smoke_command": "manual README review",
+      "push_deploys": false,
+      "external": false
+    }
+  ]
+}

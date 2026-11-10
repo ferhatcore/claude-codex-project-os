@@ -1,0 +1,86 @@
+{
+  "candidate": "1.0.0",
+  "prepared_on": "2026-11-10",
+  "environment": {
+    "os": "Windows",
+    "node": "v24.14.0",
+    "git": "2.53.0.windows.1",
+    "claude_code": "2.1.110"
+  },
+  "system_tests": {
+    "passed": 18,
+    "failed": 0,
+    "skipped": 0
+  },
+  "standalone_example_tests": {
+    "passed": 3,
+    "failed": 0,
+    "skipped": 0
+  },
+  "isolated_profiles": [
+    "lean",
+    "standard",
+    "heavy"
+  ],
+  "source_files_reviewed": 12,
+  "source_extraction_byte_integrity": true,
+  "heuristic_source_secret_findings": 0,
+  "candidate_scan_findings": 0,
+  "private_identifier_denylist": "stored outside distribution",
+  "external_checks": [
+    {
+      "url": "https://code.claude.com/docs/en/quickstart",
+      "status": 200,
+      "final_url": "https://code.claude.com/docs/en/quickstart"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/memory",
+      "status": 200,
+      "final_url": "https://code.claude.com/docs/en/memory"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/sub-agents",
+      "status": 200,
+      "final_url": "https://code.claude.com/docs/en/sub-agents"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/model-config",
+      "status": 200,
+      "final_url": "https://code.claude.com/docs/en/model-config"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/permissions",
+      "status": 200,
+      "final_url": "https://code.claude.com/docs/en/permissions"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/costs",
+      "status": 200,
+      "final_url": "https://code.claude.com/docs/en/costs"
+    },
+    {
+      "url": "https://code.claude.com/docs/en/interactive-mode",
+      "status": 200,
+      "final_url": "https://code.claude.com/docs/en/interactive-mode"
+    },
+    {
+      "url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository",
+      "status": 200,
+      "final_url": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository"
+    },
+    {
+      "url": "https://api.github.com/repos/actions/checkout/commits/11bd71901bbe5b1630ceea73d27597364c9af683",
+      "status": 200,
+      "final_url": "https://api.github.com/repos/actions/checkout/commits/11bd71901bbe5b1630ceea73d27597364c9af683"
+    },
+    {
+      "url": "https://api.github.com/repos/actions/setup-node/commits/49933ea5288caeca8642d1e84afbd3f7d6820020",
+      "status": 200,
+      "final_url": "https://api.github.com/repos/actions/setup-node/commits/49933ea5288caeca8642d1e84afbd3f7d6820020"
+    }
+  ],
+  "authenticated_ai_smoke": "not run; CLI authenticated status unavailable",
+  "hosted_ci": "not run",
+  "release_gate": "expected failure; ownership/licence/evidence/approval pending",
+  "published": false
+}

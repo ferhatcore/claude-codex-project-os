@@ -1,0 +1,17 @@
+[
+  {
+    "id": "b1",
+    "title": "Walking the Northern Trail",
+    "status": "unread"
+  },
+  {
+    "id": "b2",
+    "title": "A Guide to Small Gardens",
+    "status": "finished"
+  },
+  {
+    "id": "b3",
+    "title": "Notes from a Quiet Workshop",
+    "status": "unread"
+  }
+]

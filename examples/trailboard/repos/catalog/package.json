@@ -1,0 +1,13 @@
+{
+  "name": "trailboard-catalog-example",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test catalog.test.mjs",
+    "start": "node catalog.mjs"
+  }
+}
