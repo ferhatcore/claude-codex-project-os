@@ -1,17 +1,13 @@
-# Licence decision — publication blocker
+# Licence decision — MIT adopted
 
-No `LICENSE` file is supplied because a redistribution grant has not been confirmed. This is a local release candidate, not a licensed open-source release. GitHub explains why an open-source repository needs an explicit licence in its [licensing guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
+On 2026-11-11, **Ferhat Kosger** identified himself as the project's creator and copyright holder and explicitly selected MIT. The approved notice is `Copyright (c) 2026 Ferhat Kosger`. The full grant is in [LICENSE](LICENSE); the safe owner-decision summary is in [OWNER-DECISION.md](release/OWNER-DECISION.md).
 
-The owner must resolve this checklist with supporting evidence:
+- [x] Copyright holder identified by the owner, with no institution named.
+- [x] Distribution-rights record established from the owner's authorship statement and express MIT selection.
+- [x] Included material and upstream references reviewed in [LICENSING-AUDIT.md](release/LICENSING-AUDIT.md); no third-party runtime implementation or external prompt library is bundled.
+- [x] Standard MIT text added with the selected holder/year.
+- [x] README, provenance, contribution policy, release notes and status updated.
 
-The [2026-11-11 licensing audit](release/LICENSING-AUDIT.md) lists inspected components, upstream references and the exact unresolved holder/rights/attribution questions. Engineering inspection did not establish the missing legal authority.
+Licensing is resolved for this prepared repository. Original private source documents remain excluded. Future third-party additions must preserve their applicable notices and permissions under the contribution policy.
 
-- [ ] Confirm authorship/ownership of the supplied system and authority to distribute adaptations, including any employer/client restrictions.
-- [ ] Identify external prompt/workflow/code sources, their licences and any required credits. Excluded source documents remain excluded unless separately cleared.
-- [ ] Confirm that remaining generic workflow text and newly prepared helper/example code can receive the chosen grant.
-- [ ] Choose a licence. MIT may be appropriate only after the necessary rights are confirmed; no MIT approval is inferred here.
-- [ ] Choose the accurate copyright holder and year; record required attribution in provenance/notices.
-- [ ] Add the full approved licence text as `LICENSE`, update README/release/licensing notices and change the release record from `pending` to the selected identifier.
-- [ ] Record the decision reference in `release/status.json`, review the final diff and grant separate publication approval for that candidate.
-
-Evidence references in the public release record should be safe summaries or public records, not private agreements or personal identifiers. A model-generated review or a passing secret scan does not establish ownership. If an affected generic component cannot be cleared, remove or independently replace it, rerun checks and keep publication blocked until the remaining candidate is cleared.
+Real authenticated Claude testing and final publication approval remain separate [release gates](release/BLOCKERS.md). This licence decision does not mark either as complete.

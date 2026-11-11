@@ -1,13 +1,13 @@
 # Licensing and attribution audit
 
-Reviewed 2026-11-11. This records engineering/source inspection; it does not confirm the owner's authority or grant a licence.
+Reviewed 2026-11-11. Engineering/source inspection is complete. The owner subsequently identified himself as Ferhat Kosger and expressly selected MIT; the actual grant is in [LICENSE](../LICENSE).
 
 ## Inventory and findings
 
 | Component | Finding | Release treatment |
 |---|---|---|
-| Supplied workflow archive | Twelve original Markdown files, no bundled licence or explicit copyright notice; internal and external-method references do not prove adaptation rights | Original files remain excluded; generic adaptation remains blocked pending owner confirmation |
-| Workflow docs/templates | Generic re-expression of the supplied methodology | No MIT or ownership declaration inferred |
+| Supplied workflow archive | Twelve original Markdown files, no bundled licence or explicit copyright notice; internal and external-method references do not prove adaptation rights | Original files remain excluded; owner authorship and MIT decisions are recorded |
+| Workflow docs/templates | Generic re-expression of the supplied methodology | MIT selected through the actual owner decision, not inferred |
 | Installer, validators, smoke helper and example | Prepared within this project, Node standard libraries only | No npm packages, vendored library implementation or package lockfile |
 | CI `actions/checkout` pinned revision | Upstream MIT licence, GitHub, Inc. and contributors; invoked remotely, implementation not bundled | Pin retained and upstream licence reference recorded below |
 | CI `actions/setup-node` pinned revision | Upstream MIT licence, GitHub, Inc. and contributors; invoked remotely, implementation not bundled | Pin retained and upstream licence reference recorded below |
@@ -22,13 +22,10 @@ Upstream action licences checked at the exact pinned revisions:
 
 The finalization adds no third-party runtime dependency or bundled external prompt. Existing Git history contains the generic local builder identity and public/fictitious material; no original private document is committed. Known-pattern scans cannot establish absence of all third-party rights or confidential information.
 
-## Exact owner decisions still required
+## Resolved owner decision
 
-1. Who is the actual copyright holder (person or legal entity), and does that holder authorise distribution of this adaptation? The directory name, Git configuration and generic build identity are not evidence.
-2. Was any supplied workflow expression written under an employer/client agreement, by another contributor, or adapted from an external prompt/workflow? Identify the relevant permission/licence and required credits, or confirm that none applies.
-3. Does the owner have the necessary rights to the remaining workflow text and newly prepared helper/example code, and choose to release the complete repository under MIT? If a different licence is intended, name it and its applicable scope.
-4. Which copyright year(s) and exact notice text should appear? Preparation occurred in 2026; earlier rights or additional holders must not be guessed.
+Ferhat Kosger identified himself as the project's creator/copyright holder, with no institution named, and explicitly selected MIT using Copyright (c) 2026 Ferhat Kosger. See [OWNER-DECISION.md](OWNER-DECISION.md) for the safe decision summary and [LICENSE](../LICENSE) for the full grant.
 
-Once genuine confirmation is recorded, obtain the standard [MIT licence text](https://choosealicense.com/licenses/mit/) if MIT is selected, insert the confirmed holder/year, preserve any necessary compatible notices, and add it as `LICENSE`. Update README, release notes and the release status only after that decision. The standard licence has not been applied to this candidate because the holder and distribution rights are unresolved.
+No additional attribution requirement was identified for the material included in this repository. The project does not bundle the upstream CI action implementations, external prompt libraries or the original private source documents. Future added material must be reviewed on its own terms.
 
-See [GitHub licensing guidance](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository) and the [licence decision checklist](../LICENSE-DECISION.md). No legal inference from a model review or missing copyright notice is used to pass the release gate.
+The owner statement and repository inventory resolve the recorded licensing gate. This audit does not claim facts about undisclosed agreements or grant publication approval. Real authenticated testing and public release approval are still separate [gates](BLOCKERS.md).

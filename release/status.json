@@ -2,10 +2,10 @@
   "version": "1.0.0",
   "prepared_on": "2026-11-10",
   "state": "candidate",
-  "rights_confirmed": false,
-  "rights_evidence": null,
-  "license": "pending",
-  "attribution_reviewed": false,
+  "rights_confirmed": true,
+  "rights_evidence": "release/OWNER-DECISION.md — actual owner authorship and MIT decisions on 2026-11-11",
+  "license": "MIT",
+  "attribution_reviewed": true,
   "authenticated_smoke_test": false,
   "smoke_evidence": null,
   "publication_approved": false,
@@ -19,5 +19,10 @@
     "command": "claude auth status --json",
     "loggedIn": false,
     "model_requests_executed": 0
-  }
+  },
+  "copyright_holder": "Ferhat Kosger",
+  "copyright_year": 2026,
+  "license_evidence": "release/OWNER-DECISION.md — explicit MIT selection",
+  "attribution_evidence": "release/LICENSING-AUDIT.md",
+  "smoke_test_blocker": "Owner postponed Claude login and real model testing; current usage allowance unavailable."
 }

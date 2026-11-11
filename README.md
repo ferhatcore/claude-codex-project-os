@@ -4,7 +4,7 @@
 
 Keep an AI-assisted project moving from a clear task to an independently checked result. A central PM coordinates named developer, QA and specialist sessions through small briefs, explicit approvals and durable hand-offs. Use it for a single repository or several related repositories.
 
-**Release status:** v1.0.0 candidate, finalized for local review on 2026-11-11. Publication still requires confirmed rights/licensing, a real authenticated Claude Code smoke test and owner approval. This candidate is not yet licensed as open source. See [remaining gates](release/BLOCKERS.md) and the [readiness report](release/READINESS.md).
+**Release status:** MIT-licensed v1.0.0 candidate. Copyright (c) 2026 Ferhat Kosger. Local checks pass; a real authenticated Claude Code smoke test and final publication approval remain pending. See [remaining gates](release/BLOCKERS.md) and the [readiness report](release/READINESS.md).
 
 ## What you get
 
@@ -94,4 +94,4 @@ Prompt gates express policy; they are not a sandbox or an access-control system.
 
 ## Contributing and licensing
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and [PROVENANCE.md](PROVENANCE.md). Licence and authorship decisions remain with the owner; an MIT grant has deliberately not been inferred. Original private examples are excluded. This project is independent and is not endorsed by Anthropic. Claude Code is an Anthropic product.
+Licensed under the [MIT License](LICENSE), selected by copyright holder Ferhat Kosger on 2026-11-11. Read [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md) and [PROVENANCE.md](PROVENANCE.md). Original private examples are excluded. This project is independent and is not endorsed by Anthropic. Claude Code is an Anthropic product.

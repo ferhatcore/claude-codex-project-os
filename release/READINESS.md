@@ -1,6 +1,6 @@
 # Release readiness — v1.0.0 local final delivery
 
-Finalization reviewed 2026-11-11. The existing workflow, installer and example were preserved in a separate delivery checkout. **Release state remains candidate.** Public distribution still requires genuine legal clearance, authenticated-session evidence and explicit publication approval. The `final` directory/archive suffix is a delivery label, not a declaration that those gates passed.
+Finalization reviewed 2026-11-11. The existing workflow, installer and example were preserved in a separate delivery checkout. **Release state remains candidate.** MIT licensing and owner attribution are complete; public release still requires authenticated-session evidence and explicit publication approval. The `final` directory/archive suffix is a delivery label, not a declaration that those gates passed.
 
 ## Completed engineering work
 
@@ -8,7 +8,7 @@ Finalization reviewed 2026-11-11. The existing workflow, installer and example w
 - Added `scripts/smoke.mjs` for isolated fixture preparation, sanitised auth status and fixed local CLI/test verification. It never starts a model session or changes release approvals.
 - Preserved the original eighteen system tests; added eleven smoke-helper tests. Both suites now run in the pinned Windows/Linux CI workflow.
 - Reviewed instructions, configuration examples, Mermaid flow, GitHub presentation, contribution/security policies and publication commands. Clarified read-only reviewer reporting and shared Security/QA retry limits.
-- Completed a [licensing/dependency audit](LICENSING-AUDIT.md) with exact unresolved owner questions and upstream action licence references. No runtime dependency was added and no MIT grant was assumed.
+- Completed the [licensing/dependency audit](LICENSING-AUDIT.md), recorded the actual owner declaration and explicit MIT selection, and added LICENSE with Copyright (c) 2026 Ferhat Kosger. No runtime dependency was added.
 - Added [per-gate actions](BLOCKERS.md), refreshed release evidence and retained every unresolved gate in the existing release validator.
 
 ## Actual validation results
@@ -30,7 +30,7 @@ Local environment: Windows, Node.js v24.14.0, Git 2.53.0.windows.1, Claude Code 
 | Strict/refusal checks | Existing targets, path escapes, symlinks, invalid config/flags/links, secret markers, local artifacts, inconsistent task state, skipped tests and fixture mutations handled correctly |
 | GitHub Actions YAML | Parsed with an available local YAML parser; triggers, read-only permissions, credential persistence, matrix, pinned references and both suites checked |
 | External Markdown URLs | All 11 unique official/reference URLs returned HTTP 200 on 2026-11-11 |
-| `node scripts/check.mjs --release` | Exit 1, ten genuine unresolved findings; gate not weakened or bypassed |
+| `node scripts/check.mjs --release` | Exit 1, five remaining genuine findings; gate not weakened or bypassed |
 
 Tests use real local processes and fixtures. Their simulated role transitions, approval inputs and deterministic filter implementation are **not** authenticated Claude Code sessions. The checked-in example task stays `todo` with code/scope permission pending.
 
@@ -40,7 +40,7 @@ Node 22/Linux/hosted GitHub Actions execution is not claimed. No suitable indepe
 
 `claude auth status --json` and the sanitising helper explicitly reported `loggedIn: false`. No authenticated model request was attempted, and no credential value or account identifier was read/exported by our scripts. A real multi-session smoke test therefore remains blocked on the human's interactive login and execution. Follow the included guided procedure; a successful login-status response alone is insufficient evidence.
 
-The owner must also confirm the actual rights holder, adaptation/distribution authority, external-source/contributor obligations, licence and notice text. The legal declarations remain false/pending. Only an actual owner decision may change them. Finally, public repository creation, pushes and releases require approval of the exact final candidate. See [BLOCKERS.md](BLOCKERS.md) for each field and precise action.
+The owner identified himself as Ferhat Kosger, the project creator/copyright holder, and explicitly selected MIT using Copyright (c) 2026 Ferhat Kosger. The corresponding rights/licence records and attribution audit are complete. The owner postponed Claude login and reported unavailable usage allowance, so no model request was attempted as a workaround. Public repository creation, pushes and releases still require final approval of the exact candidate. See [BLOCKERS.md](BLOCKERS.md) for each field and precise action.
 
 ## Source, privacy and Git
 
@@ -48,6 +48,6 @@ The earlier source review read all twelve supplied Markdown files, compared extr
 
 Known-pattern scans are heuristic; absence of findings is not a universal confidentiality or ownership guarantee. Raw model transcripts, auth output, test sandboxes and development logs are excluded from the package. Git committed-content/history scans use the private denylist without reporting matched values.
 
-The local branch is `codex/finalize-v1.0.0`, retaining the original preparation commit and one finalization commit. Both use the clearly generic `Local Release Builder` identity with an `.invalid` email; this is not a copyright declaration. There is no remote or tag. The ZIP contains committed repository files under `claude-code-project-os/`, excluding `.git` metadata. Exact post-approval commands, including ZIP initialization, are in [CHECKLIST.md](CHECKLIST.md).
+The local branch is `codex/finalize-v1.0.0`, retaining preparation/finalization history and an MIT adoption commit. Preparation commits use the clearly generic `Local Release Builder` identity with an `.invalid` email; this is not a copyright declaration. There is no remote or tag. The ZIP contains committed repository files under `claude-code-project-os/`, excluding `.git` metadata. Exact post-approval commands, including ZIP initialization, are in [CHECKLIST.md](CHECKLIST.md).
 
 Machine-readable execution evidence is in [validation.json](validation.json); decision flags and their explanation references are in [status.json](status.json). Read those records as evidence declarations, never as substitutes for genuine human consent or legal authority.

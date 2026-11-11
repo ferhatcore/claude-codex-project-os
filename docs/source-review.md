@@ -32,8 +32,8 @@ Company/customer/partner identities, internal repository URLs, private infrastru
 - **Retry semantics:** Security and QA share a failed-cycle budget; fixes require relevant re-verification.
 - **Approval friction:** valid existing authorisation is recorded and reused; only missing authority is requested. Worker messages remain incapable of approval.
 - **Scheduled work:** optional, disabled and subject to the same usage stop rules; no budget exemption for overnight jobs.
-- **Ownership:** no licence or attribution grant was inferred; rights clearance blocks public distribution.
+- **Ownership:** no grant was initially inferred; on 2026-11-11 the actual owner identified himself as Ferhat Kosger and explicitly selected MIT. The owner decision is recorded without treating it as publication approval.
 
 ## Maintainer review limits
 
-The sources describe a broader original environment than this kit implements. This release packages its portable file contracts and helpers; it does not ship a live board server, native session adapter, scheduler or production integration. Offline setup and deterministic workflow rehearsal are tested. Authenticated model execution, hosted CI and rights clearance remain explicit release gates.
+The sources describe a broader original environment than this kit implements. This release packages its portable file contracts and helpers; it does not ship a live board server, native session adapter, scheduler or production integration. Offline setup and deterministic workflow rehearsal are tested. MIT licensing and owner attribution are now complete. Authenticated model execution, hosted CI and publication approval remain explicit release gates.

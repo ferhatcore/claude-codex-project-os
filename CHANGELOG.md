@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0 — MIT adoption 2026-11-11
+
+- Recorded the genuine owner declaration and explicit MIT selection.
+- Added LICENSE with Copyright (c) 2026 Ferhat Kosger and resolved the ownership/licensing records.
+- Retained candidate state and the real-test/publication gates; the owner postponed Claude login/testing.
+
 ## 1.0.0 — local finalization 2026-11-11
 
 Candidate status retained; not published or tagged.
@@ -20,4 +26,4 @@ Prepared locally; not yet published or tagged.
 - Added a collision-safe offline installer, structural checks, meaningful failure tests and a fictional multi-repository example.
 - Excluded original private documents and implementation details; documented provenance and unresolved licensing.
 
-The publication date and final licence must be recorded when the owner approves the release.
+The approved licence is now MIT. Record the actual publication date when the release is approved and published.

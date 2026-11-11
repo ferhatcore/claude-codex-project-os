@@ -12,7 +12,7 @@ File-based PM workflows for Claude Code: named roles, approval gates, independen
 
 `claude-code`, `project-management`, `ai-assisted-development`, `developer-tools`, `prompt-engineering`, `workflow`, `quality-assurance`, `multi-agent`, `documentation`
 
-Use these after licensing and publication are approved; they do not imply verified adoption.
+Use these after publication is approved; they do not imply verified adoption.
 
 ## Launch announcement draft
 
@@ -20,4 +20,4 @@ I built Claude Code Project OS to keep AI-assisted development organised through
 
 ## Portfolio overview
 
-Designed and packaged a file-based coordination system for Claude Code across one or more repositories. The work covers state/hand-off design, scoped approvals, risk-based review, model-budget policy, privacy-safe examples and validated onboarding. A dependency-free installer and offline test suite make the methodology reviewable. Publication and licence clearance remain pending; no adoption or impact metrics are claimed.
+Designed and packaged a file-based coordination system for Claude Code across one or more repositories. The work covers state/hand-off design, scoped approvals, risk-based review, model-budget policy, privacy-safe examples and validated onboarding. A dependency-free installer and offline test suite make the methodology reviewable. MIT licensing is complete; authenticated validation and publication approval remain pending; no adoption or impact metrics are claimed.

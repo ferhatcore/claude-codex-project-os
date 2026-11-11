@@ -2,13 +2,14 @@
 
 The local repository is prepared for review. Do not push, create a remote repository or publish without the owner's final approval.
 
-- [ ] Resolve [ownership and licence](../LICENSE-DECISION.md); add the approved full `LICENSE` and attribution.
+- [x] Resolve [ownership and licence](../LICENSE-DECISION.md): MIT, Copyright (c) 2026 Ferhat Kosger; full `LICENSE` added.
 - [ ] Review every staged file and the initial commit; replace the generic local build identity if desired without inventing authorship.
-- [ ] Update README, changelog and release notes to the approved licence/date/status.
+- [x] Update README, changelog and release notes to the approved MIT licence and accurate candidate status; actual publication date remains unset.
 - [ ] Run `node scripts/check.mjs`, `node --test scripts/system.test.mjs` and `node --test scripts/smoke.test.mjs`.
 - [ ] Follow the [real-session smoke procedure](../docs/authenticated-smoke.md): PM → Developer → QA → Reviewer → Completion, including permission, context and negative/correction checks. Record real client/model evidence without private transcripts.
 - [ ] Review secret/privacy scans and a final staged diff; use an additional specialist secret scanner if available.
-- [ ] Set owner/licence/evidence fields in `release/status.json`; attach safe references.
+- [x] Set owner/licence fields and genuine owner-decision reference in `release/status.json`.
+- [ ] Add actual authenticated smoke evidence when the postponed real test is completed.
 - [ ] Obtain final publication approval for the exact reviewed candidate and record its reference.
 - [ ] Run `node scripts/check.mjs --release`; an ordinary green check is not publication permission.
 - [ ] Create the GitHub repository only after approval; configure private vulnerability reporting, required checks and branch protection as appropriate.

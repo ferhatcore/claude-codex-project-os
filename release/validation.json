@@ -104,10 +104,12 @@
   },
   "release_gate": {
     "exit_code": 1,
-    "findings": 10,
+    "findings": 5,
     "rule_changes": "No existing release gate weakened; additional required smoke/audit files checked."
   },
-  "rights_confirmed": false,
-  "license": "pending",
-  "published": false
+  "rights_confirmed": true,
+  "license": "MIT",
+  "published": false,
+  "copyright_holder": "Ferhat Kosger",
+  "owner_decision": "release/OWNER-DECISION.md"
 }

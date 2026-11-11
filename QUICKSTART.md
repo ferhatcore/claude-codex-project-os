@@ -1,6 +1,6 @@
 # Quickstart
 
-Use a fresh local directory first. This candidate is for owner review until the [licence decision](LICENSE-DECISION.md) is complete.
+Use a fresh local directory first. This project is [MIT-licensed](LICENSE), Copyright (c) 2026 Ferhat Kosger. Real authenticated-session validation and final publication approval remain pending; see [release status](release/READINESS.md).
 
 ## 1. Check prerequisites
 

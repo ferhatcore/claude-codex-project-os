@@ -12,16 +12,16 @@ All twelve files were read before constructing this candidate. The archive and e
 |---|---|
 | Original documents and samples | Excluded in full; none is bundled verbatim |
 | Private product/company names, repositories, URLs, people and operations | Excluded; no source-derived product implementation is shipped |
-| PM, approvals, lanes, bounded steps and hand-off methodology | Re-expressed as generic workflow files; owner must confirm adaptation rights |
+| PM, approvals, lanes, bounded steps and hand-off methodology | Re-expressed as generic workflow files; owner identified himself as creator and explicitly selected MIT |
 | Provider-specific advanced review identity | Replaced by optional `review` tier and bounded review queue |
 | Original dependency updates, Git exceptions and fixed budgets | Redesigned for scoped changes, consistent Git ownership and configurable usage policy |
 | Example project and helper code | Newly prepared for this candidate with fictional local fixtures and standard libraries |
 | Third-party documentation | Linked as references; no third-party prompt library or implementation is bundled |
 
-There were no explicit copyright notices in the supplied archive to reproduce. This is a record of inspection, not proof that no third-party rights exist. No personal author identity, customer relationship or employer permission has been inferred. The project name describes its primary target environment and does not assert endorsement.
+There were no explicit copyright notices in the supplied archive to reproduce. This is a record of inspection, not proof that no third-party rights exist. The copyright holder was later identified by an actual owner statement; no customer relationship or employer permission was inferred from the source files. The project name describes its primary target environment and does not assert endorsement.
 
-## Outstanding decision
+## Owner decision
 
-Before public distribution, the owner must confirm rights to adapt and distribute the retained methodology/expression, identify any required attribution and choose a licence. Excluded internal/source-specific material stays excluded even if the generic candidate is later approved. Follow [LICENSE-DECISION.md](LICENSE-DECISION.md); unresolved rights block the whole candidate from public release.
+On 2026-11-11, Ferhat Kosger identified himself as the project creator/copyright holder and explicitly selected MIT with the notice Copyright (c) 2026 Ferhat Kosger. See [OWNER-DECISION.md](release/OWNER-DECISION.md), [LICENSE-DECISION.md](LICENSE-DECISION.md) and [LICENSE](LICENSE). Excluded internal/source-specific material remains excluded. Authenticated integration testing and publication approval remain pending.
 
-Finalization on 2026-11-11 preserved the original local commit and added smoke tooling, tests and release documentation in a separate delivery checkout. No original archive material or third-party runtime implementation was added. See the [licensing/attribution audit](release/LICENSING-AUDIT.md) for pinned CI action references and remaining questions. The generic builder identity in Git is a preparation identity, not a claim to copyright ownership.
+Finalization on 2026-11-11 preserved the original local commit and added smoke tooling, tests and release documentation in a separate delivery checkout. No original archive material or third-party runtime implementation was added. See the [licensing/attribution audit](release/LICENSING-AUDIT.md) for pinned CI action references and the resolved owner decision. The generic builder identity in Git is a preparation identity, not a claim to copyright ownership.
