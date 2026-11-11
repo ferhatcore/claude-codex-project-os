@@ -2,7 +2,7 @@
 
 ## Components and authority
 
-The PM workspace is the coordination root. `CLAUDE.md` contains short standing instructions; `.project-os.json` contains explicit project settings; `planning/` holds tasks, decisions, usage observations, role ownership and evidence. Product code lives in child repositories or scoped monorepo lanes. These files carry durable state across sessions.
+The PM workspace is the coordination root. `CLAUDE.md` and/or `AGENTS.md` contain the selected client instructions; `.project-os.json` contains explicit project settings; `planning/` holds tasks, decisions, usage observations, role ownership and evidence. Product code lives in child repositories or scoped monorepo lanes. These files carry durable state across sessions.
 
 The human sets direction and grants scoped authorisation. The PM plans, records decisions, coordinates roles and checks visible results. Developers implement approved work; QA independently verifies it; Security reviews risky changes; Design produces previews before UI implementation. Department roles produce bounded documents. Roles are responsibilities and can be separate manual sessions without any session API.
 

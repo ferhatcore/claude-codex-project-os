@@ -2,7 +2,7 @@
 
 Report a vulnerability through the repository's [private reporting form](https://github.com/ferhatcore/claude-code-project-os/security/advisories/new). Please include the affected file or command and enough detail to reproduce the issue. Do not put credentials or private project data in a public issue.
 
-This repository contains local helper scripts and instructions for Claude Code. The scripts use Node standard libraries. The installer creates a new directory and refuses an existing destination or symbolic link path. It does not start Claude, change Git repositories or make network requests.
+This repository contains local helper scripts and instructions for Claude Code and Codex. The scripts use Node standard libraries. The installer creates a new directory and refuses an existing destination or symbolic link path. It does not start model sessions, change Git repositories or make network requests. Codex configuration is limited to the new workspace; global settings are unchanged.
 
 The workflow instructions are project policy. Actual tool access still depends on the client and its permission settings. Review repository commands before running them and use fictional data when trying the example.
 

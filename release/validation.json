@@ -6,7 +6,8 @@
     "os": "Windows",
     "node": "v24.14.0",
     "git": "2.53.0.windows.1",
-    "claude_code": "2.1.110"
+    "claude_code": "2.1.110",
+    "codex": "0.147.0"
   },
   "system_tests": {
     "passed": 18,
@@ -14,7 +15,7 @@
     "skipped": 0
   },
   "smoke_helper_tests": {
-    "passed": 11,
+    "passed": 13,
     "failed": 0,
     "skipped": 0
   },
@@ -24,11 +25,9 @@
     "skipped": 0
   },
   "fresh_clone": {
-    "validation_passed": true,
-    "both_test_suites_passed": true,
-    "example_install_and_tests_passed": true,
-    "implementation_sha256": "ad5baddf38d9d879750e6af520e28a06907f929159fb9203b90635778f5c41b3",
-    "note": "Digest covers scripts, templates, examples and CI; only release/documentation evidence is refreshed after this clone test."
+    "status": "pending for current dual-runtime commit",
+    "previous_published_commit": "f4d794f756aa86969c9edd5c0a8633252f49027f",
+    "note": "Earlier clone evidence covered the Claude-only implementation. Current dual-runtime installation tests cover all runtime/profile combinations; a fresh clone is checked after push."
   },
   "smoke_baseline": {
     "executed": true,
@@ -37,9 +36,17 @@
     "authenticated_sessions_proven": false
   },
   "authentication": {
-    "loggedIn": false,
-    "source": "claude auth status --json",
-    "model_requests_executed": 0
+    "claude": {
+      "loggedIn": false,
+      "source": "previous claude auth status --json check",
+      "model_requests_executed": 0
+    },
+    "codex": {
+      "loggedIn": true,
+      "source": "codex login status and real authenticated CLI sessions",
+      "model_requests_executed": true,
+      "full_build_flow_completed": false
+    }
   },
   "isolated_profiles": [
     "lean",
@@ -99,8 +106,7 @@
   ],
   "cross_platform": {
     "local_windows_node24": "passed",
-    "linux_node22": "passed in GitHub Actions",
-    "hosted_windows_linux_node22_ci": "passed in GitHub Actions"
+    "hosted_windows_linux_node22_ci": "pending for dual-runtime commit"
   },
   "release_gate": {
     "exit_code": 1,
@@ -125,6 +131,29 @@
       "Windows",
       "Ubuntu"
     ],
-    "node": "22"
+    "node": "22",
+    "scope": "previous Claude-only implementation; dual-runtime run pending"
+  },
+  "runtime_adapter_tests": {
+    "passed": 11,
+    "failed": 0,
+    "skipped": 0
+  },
+  "runtime_checks": {
+    "choices": [
+      "claude",
+      "codex",
+      "both"
+    ],
+    "runtime_profile_combinations": 9,
+    "shared_planning": "passed",
+    "legacy_default": "claude",
+    "codex_toml_parse": "5 files passed using Python tomllib",
+    "codex_authenticated_bootstrap": "passed",
+    "codex_generic_native_qa_delegation": "read only inspection completed",
+    "codex_named_agent_selection": "not exposed by installed client",
+    "codex_full_build_flow": "blocked by effective read only tool policy",
+    "claude_authenticated_build_flow": "not run",
+    "evidence": "release/CODEX-CHECK.md"
   }
 }

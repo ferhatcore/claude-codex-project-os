@@ -24,7 +24,7 @@
   "copyright_year": 2026,
   "license_evidence": "release/OWNER-DECISION.md — explicit MIT selection",
   "attribution_evidence": "release/LICENSING-AUDIT.md",
-  "smoke_test_blocker": "Authenticated Claude session evidence pending.",
+  "smoke_test_blocker": "Complete authenticated build sequence pending for both clients; Codex bootstrap and read only delegation were observed.",
   "publication_scope": "Public source repository at ferhatcore/claude-code-project-os; no claim of a completed authenticated Claude test.",
   "repository_url": "https://github.com/ferhatcore/claude-code-project-os",
   "published": true,
@@ -40,7 +40,26 @@
       "Windows",
       "Ubuntu"
     ],
-    "node": "22"
+    "node": "22",
+    "scope": "previous Claude-only implementation; dual-runtime run pending"
   },
-  "private_vulnerability_reporting": true
+  "private_vulnerability_reporting": true,
+  "supported_runtimes": [
+    "claude",
+    "codex",
+    "both"
+  ],
+  "runtime_evidence": {
+    "claude": {
+      "authenticated_build_flow": false
+    },
+    "codex": {
+      "authenticated_bootstrap": true,
+      "native_qa_inspection": true,
+      "named_agent_selection": false,
+      "authenticated_build_flow": false,
+      "blocker": "Effective tool policy refused writes and QA test commands.",
+      "evidence": "release/CODEX-CHECK.md"
+    }
+  }
 }

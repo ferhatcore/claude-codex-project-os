@@ -19,4 +19,5 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/check.mjs
-      - run: node --test scripts/system.test.mjs scripts/smoke.test.mjs
+      - run: node --test scripts/system.test.mjs scripts/smoke.test.mjs scripts/runtimes.test.mjs
+      - run: node --test examples/trailboard/repos/catalog/catalog.test.mjs

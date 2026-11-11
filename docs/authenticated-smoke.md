@@ -1,13 +1,13 @@
-# Reproducible Claude Code integration smoke test
+# Reproducible session integration test
 
-This is a guided test of **real, separate Claude Code sessions**, not an automatic declaration of integration success. A human opens the sessions and makes scoped approvals. The helper prepares fictional fixtures and checks local behavior; it never invokes a model or changes release approval flags.
+This is a guided test of **real role sessions in Claude Code or Codex**, not an automatic declaration of integration success. A human opens the sessions and makes scoped approvals. The helper prepares fictional fixtures and checks local behavior; it never invokes a model or changes release approval flags.
 
 ## Prepare and check access
 
 From the distribution root (PowerShell and POSIX):
 
 ```sh
-node scripts/smoke.mjs --prepare --target ../trailboard-smoke
+node scripts/smoke.mjs --prepare --target ../trailboard-smoke --runtime claude
 node scripts/smoke.mjs --check-auth
 node scripts/smoke.mjs --verify --workspace ../trailboard-smoke --phase baseline
 ```
@@ -18,7 +18,7 @@ The destination must not exist. Preparation creates the installed Trailboard exa
 
 Inspect all fixture files before trusting the workspace. No production repository, credential file, environment secret or external service is needed. Use normal permission controls. The verification command executes the fictional CLI and tests; review model-written code before allowing it to run. It is not an OS sandbox. Child Node commands receive a small system-environment allowlist, not the parent process's credential variables or Node preload settings.
 
-## Real session sequence
+## Claude Code session sequence
 
 All sessions start in the disposable `trailboard-smoke` root. This ensures planning files are visible without granting other project directories. Select the model you actually have through the client; the project tiers initially inherit it. Record the effective model/effort and actual session identifiers from the client, or mark them unknown. Logical names are not proof that a session ran.
 
@@ -69,3 +69,13 @@ Complete the generated `smoke/session-review.md` from real observations. Capture
 Keep raw transcripts and account details private. Prepare a small sanitised summary with actual client version, effective model settings, dates, observed stage outcomes, safe artifact references, failures/corrections and remaining gaps. Review it for private identifiers before placing it under `release/`. Only then set `authenticated_smoke_test` and `smoke_evidence` from genuine evidence. The helper deliberately leaves these declarations unchanged. Legal clearance and final publication approval remain separate requirements.
 
 If authentication is unavailable, run preparation, baseline verification, normal installation/tests and the helper regression suite. Record the explicit logged-out/unknown status and leave the authenticated gate false. Never rename offline results as integration success.
+
+## Codex session sequence
+
+Prepare another new fixture with `--runtime codex` (or `both`), then use `node scripts/smoke.mjs --check-auth --runtime codex`. The helper checks login only; a genuine model request is still required for session evidence.
+
+Open `codex` at that generated root and invoke `$project-os-start`. Use the same task, approval example and verification commands above. Native role selection varies by client. When direct names are exposed, use the installed project_os roles. When only generic native delegation is exposed, PM reads the corresponding .codex/agents TOML and includes its full instructions in the worker brief. Record the actual tool and logical role separately. If neither is available, open manual Codex sessions and use the generated role prompts.
+
+Use `AGENTS.md` for Codex, not Claude's permission-mode flags. Real tool permissions come from the parent client. Run one worker at a time, wait and close it before starting the next role. Check the first unapproved attempt stops, then record a real applicable approval before implementation. Save a handoff and resume from it in another session to check continuity.
+
+For both mode, the two clients use the same planning directory. Do not test simultaneous writers in a shared lane. A result from one client is evidence only for that client and observed tool path. Record authenticated results per runtime; do not treat one completed Codex test as a completed Claude Code test.

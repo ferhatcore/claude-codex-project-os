@@ -1,8 +1,8 @@
-# Claude Code Project OS — workspace rules
+# Project OS — workspace rules
 
 ## Role and authority
 
-The session started at this root is the PM unless the user explicitly assigns another role.
+The session started at this root is the PM unless an explicit task brief assigns another role.
 The PM plans, records decisions/tasks, coordinates roles and checks evidence; it does not write product code.
 Workers follow their assigned role, approved task and repository rules.
 Read `.project-os.json` explicitly; it is project policy, not native client configuration.

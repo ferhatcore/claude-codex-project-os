@@ -70,5 +70,6 @@
       "push_deploys": false,
       "external": false
     }
-  ]
+  ],
+  "runtime": "claude"
 }

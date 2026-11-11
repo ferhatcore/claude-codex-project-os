@@ -5,7 +5,7 @@
 The owner approved public source upload on 2026-11-11. The repository is available at [ferhatcore/claude-code-project-os](https://github.com/ferhatcore/claude-code-project-os).
 
 1. Copyright holder and MIT licence recorded.
-2. Local validation, 29 system/helper tests and 3 example tests passed.
+2. Local validation, 42 system/helper/runtime tests and 3 example tests passed.
 3. Public overview, quickstart and repository metadata prepared.
 4. Source pushed to `main`.
 5. Private vulnerability reporting enabled.
@@ -19,7 +19,7 @@ From the repository root:
 
 ```sh
 node scripts/check.mjs
-node --test scripts/system.test.mjs scripts/smoke.test.mjs
+node --test scripts/system.test.mjs scripts/smoke.test.mjs scripts/runtimes.test.mjs
 node --test examples/trailboard/repos/catalog/catalog.test.mjs
 node scripts/check.mjs --release
 git status --short
@@ -38,9 +38,9 @@ gh run list --repo ferhatcore/claude-code-project-os --workflow validate.yml
 Use the actual run number from that output with `gh run watch RUN_ID --repo ferhatcore/claude-code-project-os --exit-status`. If the checks pass, publish the approved tag and notes:
 
 ```sh
-git tag -a v1.0.0 -m "Claude Code Project OS v1.0.0"
+git tag -a v1.0.0 -m "Project OS v1.0.0"
 git push origin v1.0.0
-gh release create v1.0.0 --repo ferhatcore/claude-code-project-os --verify-tag --title "Claude Code Project OS v1.0.0" --notes-file release/v1.0.0.md
+gh release create v1.0.0 --repo ferhatcore/claude-code-project-os --verify-tag --title "Project OS v1.0.0" --notes-file release/v1.0.0.md
 ```
 
 These are future release commands. No stable tag or GitHub release was created as part of the initial source upload.

@@ -4,13 +4,19 @@ import { spawnSync } from 'node:child_process';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { initialize } from './init.mjs';
-import { parseArgs, requireNode, realRoot, safeChild } from './lib.mjs';
+import { parseArgs, requireNode, realRoot, safeChild, runtimes } from './lib.mjs';
 
 const digest = bytes => createHash('sha256').update(bytes).digest('hex');
 const writeJSON = (file, data) => writeFileSync(file, `${JSON.stringify(data, null, 2)}\n`, { flag: 'wx' });
 
-export function summarizeAuth(result) {
+export function summarizeAuth(result, runtime = 'claude') {
   if (result.error || result.signal) return { loggedIn: null, reason: 'CLI unavailable or timed out' };
+  if (runtime === 'codex') {
+    const response=`${result.stdout || ''}\n${result.stderr || ''}`;
+    if (result.status === 0 && /logged in/i.test(response)) return {loggedIn:true,reason:'Codex CLI reports authenticated access; model access not yet tested'};
+    if (/not logged in|log in required|login required/i.test(response)) return {loggedIn:false,reason:'Interactive Codex login required'};
+    return {loggedIn:null,reason:'Authentication could not be established'};
+  }
   let data;
   try { data = JSON.parse(result.stdout); } catch { return { loggedIn: null, reason: 'Unrecognized CLI status response' }; }
   if (data.loggedIn === true && result.status === 0) return { loggedIn: true, reason: 'CLI reports authenticated access; model access not yet tested' };
@@ -18,7 +24,15 @@ export function summarizeAuth(result) {
   return { loggedIn: null, reason: 'Authentication could not be established' };
 }
 
-export function checkAuth() {
+export function checkAuth(runtime = 'claude') {
+  if (!runtimes.includes(runtime)) throw new Error('Invalid runtime.');
+  if (runtime === 'both') return {claude:checkAuth('claude'),codex:checkAuth('codex')};
+  if (runtime === 'codex') {
+    // Static command only: Windows npm shims need a shell; no user input is interpolated.
+    const command=process.platform==='win32' ? 'powershell.exe' : 'codex';
+    const args=process.platform==='win32' ? ['-NoProfile','-NonInteractive','-Command','& (Get-Command codex.exe, codex.cmd -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty Source) login status'] : ['login','status'];
+    return summarizeAuth(spawnSync(command,args,{encoding:'utf8',timeout:10000,maxBuffer:128*1024,windowsHide:true}),'codex');
+  }
   // The client inspects its own session; no credential file or value is read here.
   return summarizeAuth(spawnSync('claude', ['auth', 'status', '--json'], {
     encoding: 'utf8', timeout: 10000, maxBuffer: 128 * 1024, windowsHide: true
@@ -33,21 +47,21 @@ const prompts = {
   '05-completion.md': `# PM completion checkpoint\n\nReturn to the real Trailboard : PM session or start a fresh PM with a self-contained hand-off. Read board, decisions, TB-001, independent QA/review and smoke evidence. Verify every acceptance criterion and open issue. If evidence is incomplete, report the blocker. Otherwise record completeness and present the exact proposed next action. Do not commit/push/merge/deploy or claim publication. Produce smoke/session-review.md using its checklist, recording genuine observed session identifiers/model settings or unknown. Never label this an authenticated run if real model sessions did not execute.\n`
 };
 
-export function prepareSmoke(target) {
+export function prepareSmoke(target, runtime = 'claude') {
   requireNode();
-  const installed = initialize({ target, example: true, profile: 'lean' });
+  const installed = initialize({ target, example: true, profile: 'lean', runtime });
   const root = installed.target;
   const dir = path.join(root, 'smoke');
   mkdirSync(dir);
   const fixture = readFileSync(path.join(root, 'repos/catalog/data.json'));
   writeJSON(path.join(root, '.project-os-smoke.json'), {
-    schema_version: 1, kind: 'trailboard-smoke', fixture_sha256: digest(fixture),
+    schema_version: 1, kind: 'trailboard-smoke', runtime, fixture_sha256: digest(fixture),
     authenticated_sessions_executed: false,
     note: 'Preparation only. This marker is neither approval nor authenticated-session evidence.'
   });
-  for (const [file, text] of Object.entries(prompts)) writeFileSync(path.join(dir,file), text, { flag: 'wx' });
+  for (const [file, text] of Object.entries(prompts)) writeFileSync(path.join(dir,file), runtime === 'codex' ? text.replaceAll('CLAUDE.md','AGENTS.md') : runtime === 'both' ? text.replaceAll('root CLAUDE.md','root entry rules for your client') : text, { flag: 'wx' });
   writeFileSync(path.join(dir,'session-review.md'), `# Authenticated session review — not run\n\nNo authenticated session has been executed by preparation. Complete this record only from genuine observations.\n\n| Check | Actual evidence / verdict |\n|---|---|\n| PM / Developer / QA / Reviewer actual sessions and order | not run |\n| Actual model and effort versus configured tier | unverified |\n| Missing permission refused, then actual human scope/code approval recorded | unverified |\n| Role boundaries and one worker per lane | unverified |\n| Context saved and genuinely resumed by a fresh session | unverified |\n| Per-criterion independent QA including README/coverage review | unverified |\n| Actual negative case and any real correction cycle | unverified |\n| Independent review findings resolved or listed | unverified |\n| PM completeness report and Git/deploy gates preserved | unverified |\n\nKeep private transcripts outside public exports. A Node verification report alone does not satisfy these checks.\n`, { flag: 'wx' });
-  return { prepared: true, authenticated_sessions_executed: false, target: root };
+  return { prepared: true, runtime, authenticated_sessions_executed: false, target: root };
 }
 
 function assertSmokeWorkspace(workspace) {
@@ -111,20 +125,20 @@ export function verifySmoke(workspace, phase) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   try {
-    const args = parseArgs(process.argv.slice(2), { '--prepare':'flag','--target':'value','--check-auth':'flag','--verify':'flag','--workspace':'value','--phase':'value','--help':'flag' });
-    if (args['--help']) console.log('smoke.mjs --prepare --target NEW_DIRECTORY | --check-auth | --verify --workspace PATH --phase baseline|candidate');
+    const args = parseArgs(process.argv.slice(2), { '--prepare':'flag','--target':'value','--runtime':'value','--check-auth':'flag','--verify':'flag','--workspace':'value','--phase':'value','--help':'flag' });
+    if (args['--help']) console.log('smoke.mjs --prepare --target NEW_DIRECTORY [--runtime claude|codex|both] | --check-auth [--runtime claude|codex|both] | --verify --workspace PATH --phase baseline|candidate');
     else {
       if (['--prepare','--check-auth','--verify'].filter(key => args[key]).length !== 1) throw new Error('Choose exactly one smoke operation.');
       if (args['--prepare']) {
         if (args['--workspace'] || args['--phase']) throw new Error('Preparation accepts --target only.');
-        console.log(JSON.stringify(prepareSmoke(args['--target']), null, 2));
+        console.log(JSON.stringify(prepareSmoke(args['--target'],args['--runtime']), null, 2));
       } else if (args['--check-auth']) {
         if (args['--target'] || args['--workspace'] || args['--phase']) throw new Error('Authentication check accepts no target or phase.');
-        const status = checkAuth();
+        const status = checkAuth(args['--runtime']);
         console.log(JSON.stringify(status, null, 2));
-        if (status.loggedIn !== true) process.exitCode = 2;
+        if (args['--runtime']==='both' ? status.claude.loggedIn!==true || status.codex.loggedIn!==true : status.loggedIn !== true) process.exitCode = 2;
       } else {
-        if (args['--target'] || !args['--workspace']) throw new Error('Verification requires --workspace and --phase.');
+        if (args['--target'] || args['--runtime'] || !args['--workspace']) throw new Error('Verification reads the installed runtime; use --workspace and --phase.');
         const result = verifySmoke(args['--workspace'], args['--phase']);
         console.log(JSON.stringify(result, null, 2));
         if (!result.passed) process.exitCode = 1;

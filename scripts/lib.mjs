@@ -3,6 +3,8 @@ import path from 'node:path';
 
 export const distributionRoot = path.resolve(import.meta.dirname, '..');
 export const profiles = { lean: 1, standard: 2, heavy: 3 };
+export const runtimes = ['claude','codex','both'];
+export const entriesForRuntime = (runtime = 'claude') => runtime === 'both' ? ['CLAUDE.md','AGENTS.md'] : [runtime === 'codex' ? 'AGENTS.md' : 'CLAUDE.md'];
 export const statuses = new Set(['todo', 'in_progress', 'review', 'qa', 'qa_failed', 'done', 'blocked', 'question']);
 export const types = new Set(['backend-api', 'service', 'web', 'admin', 'landing', 'mobile', 'infra', 'data', 'library', 'cli', 'tests', 'docs', 'external']);
 
@@ -71,13 +73,14 @@ export function configErrors(config, root, requireRepos = false) {
   const fail = message => errors.push(message);
   const object = value => value && typeof value === 'object' && !Array.isArray(value);
   const string = value => typeof value === 'string' && value.trim().length > 0;
-  const keys = (value, allowed, label) => {
+  const keys = (value, allowed, label, optional = []) => {
     if (!object(value)) { fail(`${label}: object required`); return false; }
     for (const key of Object.keys(value)) if (!allowed.includes(key)) fail(`${label}: unknown field ${key}`);
-    for (const key of allowed) if (!(key in value)) fail(`${label}: missing field ${key}`);
+    for (const key of allowed) if (!(key in value) && !optional.includes(key)) fail(`${label}: missing field ${key}`);
     return true;
   };
-  if (!keys(config, ['schema_version','project','profile','budget','models','capabilities','advanced_review','repositories'], 'configuration')) return errors;
+  if (!keys(config, ['schema_version','project','profile','budget','models','capabilities','advanced_review','repositories','runtime'], 'configuration', ['runtime'])) return errors;
+  if (config.runtime !== undefined && !runtimes.includes(config.runtime)) fail('runtime must be claude, codex or both');
   if (config.schema_version !== 1) fail('unsupported schema_version');
   if (!Object.hasOwn(profiles, config.profile)) fail('invalid profile');
   if (keys(config.project, ['name','language','time_zone'], 'project')) {
@@ -135,7 +138,7 @@ export function configErrors(config, root, requireRepos = false) {
       if (typeof repo.push_deploys !== 'boolean' || typeof repo.external !== 'boolean') fail(`repository ${repo.id}: deployment/external flags must be explicit booleans`);
       if (repo.type === 'external' && !repo.external) fail('external type must be marked external');
       if (requireRepos && target && !existsSync(target)) fail(`repository ${repo.id}: path missing`);
-      if (requireRepos && target && existsSync(target) && !repo.external && !existsSync(path.join(target, 'CLAUDE.md'))) fail(`repository ${repo.id}: entry rules missing`);
+      if (requireRepos && target && existsSync(target) && !repo.external) for (const entry of entriesForRuntime(config.runtime)) if (!existsSync(path.join(target, entry))) fail(`repository ${repo.id}: ${entry} entry rules missing`);
     }
   }
   return errors;

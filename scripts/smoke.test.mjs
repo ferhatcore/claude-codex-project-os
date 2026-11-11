@@ -125,3 +125,22 @@ test('smoke CLI rejects conflicting operations and returns failure for unimpleme
   assert.equal(incomplete.status,1);
   assert.equal(JSON.parse(incomplete.stdout).authenticated_sessions_proven,false);
 });
+
+test('Codex and dual smoke fixtures preserve pending approval and provider independent verification',()=>{
+  for(const runtime of ['codex','both']){
+    const {target:root}=prepareSmoke(target(`runtime-${runtime}`),runtime);
+    assert.equal(JSON.parse(read(path.join(root,'.project-os.json'))).runtime,runtime);
+    assert.ok(existsSync(path.join(root,'AGENTS.md')));
+    if(runtime==='codex')assert.ok(!read(path.join(root,'smoke/01-pm.md')).includes('CLAUDE.md'));
+    assert.equal(verifySmoke(root,'baseline').passed,true);
+    assert.match(read(path.join(root,'planning/tasks/TB-001.md')),/\*\*Code permission:\*\* pending/);
+  }
+});
+
+test('Codex auth reporting recognises client status without exporting identity or errors',()=>{
+  const success=summarizeAuth({status:0,stdout:'',stderr:'Logged in using ChatGPT'},'codex');
+  assert.equal(success.loggedIn,true);
+  assert.ok(!JSON.stringify(success).includes('ChatGPT'));
+  assert.equal(summarizeAuth({status:1,stdout:'Not logged in'},'codex').loggedIn,false);
+  assert.equal(summarizeAuth({status:1,stderr:'private diagnostic'},'codex').loggedIn,null);
+});

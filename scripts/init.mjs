@@ -1,12 +1,15 @@
-import { existsSync, lstatSync, mkdirSync, copyFileSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, lstatSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { distributionRoot, profiles, requireNode, parseArgs, assertNoSymlinkAncestors, walk, configErrors } from './lib.mjs';
+import { distributionRoot, profiles, runtimes, requireNode, parseArgs, assertNoSymlinkAncestors, walk, configErrors } from './lib.mjs';
+import { buildRuntimeManifest, runtimeFileErrors } from './runtimes.mjs';
 
 export function initialize(options) {
   requireNode();
   if (!options.target) throw new Error('--target is required; destination must not exist.');
   const profile = options.profile || 'lean';
+  const runtime = options.runtime === undefined ? 'claude' : options.runtime;
+  if (!runtimes.includes(runtime)) throw new Error('Runtime must be claude, codex or both.');
   if (!Object.hasOwn(profiles, profile)) throw new Error('Profile must be lean, standard or heavy.');
   if (options.name !== undefined && (typeof options.name !== 'string' || !options.name.trim() || /[\r\n\x00-\x1f]/.test(options.name))) throw new Error('Project name must be nonempty plain text.');
   const target = path.resolve(options.target);
@@ -30,29 +33,30 @@ export function initialize(options) {
   }
   const config = JSON.parse(readFileSync(path.join(options.example ? example : source, '.project-os.json'), 'utf8'));
   config.profile = profile;
+  config.runtime = runtime;
   config.budget.max_active_workers = profiles[profile];
   if (options.name) config.project.name = options.name.trim();
   const errors = configErrors(config, target);
   if (errors.length) throw new Error(`Invalid source configuration: ${errors.join('; ')}`);
+  const output = buildRuntimeManifest(manifest, runtime, config);
   mkdirSync(target); // No recursive target creation: a race/collision fails closed.
-  for (const { relative, file } of manifest) {
+  for (const [relative, content] of output) {
     const destination = path.join(target, relative);
     mkdirSync(path.dirname(destination), { recursive: true });
-    copyFileSync(file, destination, 1); // COPYFILE_EXCL
+    writeFileSync(destination, content, { flag: 'wx' });
   }
-  writeFileSync(path.join(target, '.project-os.json'), `${JSON.stringify(config, null, 2)}\n`);
-  const installed = configErrors(config, target, true);
+  const installed = [...configErrors(config, target, true), ...runtimeFileErrors(target, config)];
   if (installed.length) throw new Error(`Installed workspace needs review: ${installed.join('; ')}`);
-  return { target, profile, files: manifest.length, example: Boolean(options.example) };
+  return { target, profile, runtime, files: output.size, example: Boolean(options.example) };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   try {
-    const args = parseArgs(process.argv.slice(2), { '--target':'value','--name':'value','--profile':'value','--example':'flag','--help':'flag' });
-    if (args['--help']) console.log('node scripts/init.mjs --target NEW_DIRECTORY [--name NAME] [--profile lean|standard|heavy] [--example]');
+    const args = parseArgs(process.argv.slice(2), { '--target':'value','--name':'value','--profile':'value','--runtime':'value','--example':'flag','--help':'flag' });
+    if (args['--help']) console.log('node scripts/init.mjs --target NEW_DIRECTORY [--runtime claude|codex|both] [--name NAME] [--profile lean|standard|heavy] [--example]');
     else {
-      const result = initialize({ target: args['--target'], name: args['--name'], profile: args['--profile'], example: args['--example'] });
-      console.log(`Created ${result.target}\nProfile: ${result.profile}; example: ${result.example}. No Claude, Git or network operation was run.\nStart Claude Code there and ask it to read START.md.`);
+      const result = initialize({ target: args['--target'], name: args['--name'], runtime: args['--runtime'], profile: args['--profile'], example: args['--example'] });
+      console.log(`Created ${result.target}\nRuntime: ${result.runtime}; profile: ${result.profile}; example: ${result.example}. No model, Git or network operation was run.\nOpen your selected client there and ask it to read START.md.`);
     }
   } catch (error) { console.error(`Setup refused: ${error.message}`); process.exitCode = 1; }
 }

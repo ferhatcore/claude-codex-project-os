@@ -1,6 +1,6 @@
 # PM workspace
 
-Start Claude Code in this directory and ask it to read [START.md](START.md). This workspace coordinates product repositories; it does not start workers automatically.
+Start your selected coding client in this directory and ask it to read [START.md](START.md). This workspace coordinates product repositories; it does not start workers automatically.
 
 | File | Purpose |
 |---|---|

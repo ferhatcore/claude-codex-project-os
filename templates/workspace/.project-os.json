@@ -47,5 +47,6 @@
     "required_before_final_rules": false,
     "exclusive": true
   },
-  "repositories": []
+  "repositories": [],
+  "runtime": "claude"
 }

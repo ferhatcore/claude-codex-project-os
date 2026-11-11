@@ -2,11 +2,12 @@
 
 ## Configuration contract
 
-Edit the installed `.project-os.json`; run `node scripts/check.mjs --workspace /path/to/pm-root` from the distribution. This custom file is read by the PM and validated by our checker. It does not configure Claude Code's native model selection, tool permissions or automatic session dispatch.
+Edit the installed `.project-os.json`; run `node scripts/check.mjs --workspace /path/to/pm-root` from the distribution. This custom file is read by the PM and validated by our checker. It does not configure the client's native model selection, tool permissions or automatic session dispatch. For Codex, the installer also writes the selected worker cap into `.codex/config.toml`; keep that cap consistent when changing project policy.
 
 | Setting | Meaning |
 |---|---|
 | `project.name`, `language`, `time_zone` | Human-facing defaults; use an IANA time zone |
+| `runtime` | `claude`, `codex` or `both`; omitted in legacy configurations means Claude Code |
 | `profile` | `lean`, `standard`, `heavy`; installs worker caps of 1, 2, 3 respectively |
 | `budget.max_active_workers` | Worker cap excludes the PM; lower for shared limits |
 | `budget.usage` | Project-policy percentages for an observed short/weekly window |
@@ -25,11 +26,11 @@ With `inherit`, leave the active model unchanged. A non-inherited selector is ap
 
 ## Existing repositories
 
-The installer deliberately accepts only a new destination. For an existing mono-repository, first generate a separate scratch workspace, review the generated controls, then merge selected planning files and entry rules manually after authorisation. Preserve every existing `CLAUDE.md`, `.claude/`, hook, CI file and Git ignore rule; do not replace them wholesale.
+The installer deliberately accepts only a new destination. For an existing mono-repository, first generate a separate scratch workspace, review the generated controls, then merge selected planning files and entry rules manually after authorisation. Preserve existing `CLAUDE.md`, `AGENTS.md`, `.claude/`, `.codex/`, `.agents/`, hooks, CI files and Git ignore rules; do not replace them wholesale.
 
 For a multi-repository workspace, use relative child paths in the configuration. If repositories already live elsewhere, the PM can instead use explicitly approved absolute paths in task briefs and manual session setup; this manual arrangement is outside the installer's path-validated configuration contract. Do not add symlinks to bypass path checks. Grant workers access only to the necessary task/rule directory using your client's supported controls.
 
-Copy the [repository rule starter](../templates/repository/README.md) only after comparing existing instructions. Root rules are loaded automatically when applicable, but each worker should explicitly read the PM entry file because repositories and worktrees can sit outside its ancestry. A `CLAUDE.md` pointer must identify the real path; `AGENTS.md` is not assumed to auto-load in Claude Code.
+Choose the installer runtime with `--runtime claude|codex|both`. Codex adds native role/skill files; both clients keep a single planning history. See [Codex setup](codex.md). Copy the [repository rule starter](../templates/repository/README.md) only after comparing existing instructions. Root rules are loaded automatically when applicable, but each worker should explicitly read the PM entry file because repositories and worktrees can sit outside its ancestry. A `CLAUDE.md` pointer must identify the real path; `AGENTS.md` is not assumed to auto-load in Claude Code.
 
 Before code dispatch, replace `unverified` branch/test entries with evidence from manifests and code in an approved discovery task. Do not invent build commands. Configure push-triggered deployment explicitly. A greenfield project first needs a human-approved architecture proposal; the PM does not silently choose infrastructure.
 

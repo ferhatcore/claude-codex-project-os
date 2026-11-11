@@ -12,7 +12,7 @@ Reviewed 2026-11-11. Engineering/source inspection is complete. The owner subseq
 | CI `actions/checkout` pinned revision | Upstream MIT licence, GitHub, Inc. and contributors; invoked remotely, implementation not bundled | Pin retained and upstream licence reference recorded below |
 | CI `actions/setup-node` pinned revision | Upstream MIT licence, GitHub, Inc. and contributors; invoked remotely, implementation not bundled | Pin retained and upstream licence reference recorded below |
 | Official documentation links | References only; no copied documentation pages bundled | Links retained; no ownership claim |
-| Claude Code / Node.js / Git / GitHub CLI | User-installed external tools; binaries not distributed | Their own licensing/terms apply; no account or service access granted by this kit |
+| Claude Code / Codex / Node.js / Git / GitHub CLI | User-installed external tools; binaries not distributed | Their own licensing/terms apply; no account or service access granted by this kit |
 | Fictional fixtures | Local invented titles/records; no customer data or original payment implementation | Retained |
 
 Upstream action licences checked at the exact pinned revisions:

@@ -1,89 +1,79 @@
 # Quickstart
 
-Use a new local directory for the first setup. This project uses the [MIT License](LICENSE), Copyright (c) 2026 Ferhat Kosger.
+Use a new local directory for the first setup. Choose Claude Code, Codex or both. The same tasks and decisions work with either client.
 
-## 1. Check prerequisites
+## 1. Prerequisites
 
-Install Claude Code using its [official installation instructions](https://code.claude.com/docs/en/quickstart), then authenticate interactively with your account. Do not paste credentials into planning files. Install Node.js 22+ separately if you want the helper scripts. Run:
+Install Node.js 22 or newer and your selected client. Use the [Claude Code setup guide](https://code.claude.com/docs/en/quickstart) or [Codex instructions](docs/codex.md). Authenticate through the client; do not put credentials in project files. No npm install or external service is needed for the example.
+
+## 2. Create a workspace
+
+From this repository root, choose one command:
 
 ```sh
-node --version
-claude --version
+node scripts/init.mjs --target ../claude-demo --example --runtime claude
+node scripts/init.mjs --target ../codex-demo --example --runtime codex
+node scripts/init.mjs --target ../shared-demo --example --runtime both
 ```
 
-No npm install, MCP server or additional service is needed. Review downloaded files before trusting the directory in Claude Code.
+The commands work in PowerShell and POSIX shells. Each destination must not already exist. The default profile is lean with one active worker; use `--profile standard` or `--profile heavy` when appropriate. Omitting `--runtime` preserves the original Claude Code default.
 
-## 2. Create the isolated example
-
-From this distribution's root, these commands work in PowerShell and POSIX shells:
+In the selected generated directory, run:
 
 ```sh
-node scripts/init.mjs --target ../trailboard-demo --example --profile lean
-cd ../trailboard-demo
 node repos/catalog/catalog.mjs
 node --test repos/catalog/catalog.test.mjs
 ```
 
-Expected CLI output is three fictional titles, one per line. The three baseline tests should pass. An existing target, even an empty one, is refused. Pick a different name instead of deleting your work.
-
-The example has `repos/catalog` (local CLI) and `repos/handbook` (documentation). These are separate logical repositories; the installer creates no `.git` directories, branches or remotes. It writes only inside the new destination, uses no network and never invokes Claude.
+Expected output is three fictional book titles. The baseline has three tests. The installer creates logical repository folders, not Git metadata, branches, remotes or cloud resources.
 
 ## 3. Start the PM
 
-Run `claude` from `trailboard-demo`, then paste:
+Open `claude` or `codex` at the generated workspace root. For both mode, choose the client for the current step. Paste:
 
 ```text
-Read START.md and follow its bootstrap procedure. You are the PM.
-Use the project configuration and report available capabilities honestly.
-Inspect manifests, not product code, during onboarding. Report the proposed
-TB-001 task and the approvals it needs. No product code or Git writes yet.
+Read START.md and follow its bootstrap procedure. Act as PM.
+Inspect the configuration, repository manifests and planning files.
+Report actual available tools and the next task proposal.
+Do not change product code yet.
 ```
 
-Expected response: a short capability report, repository table, model choices requiring confirmation, and the first task proposal. It must not claim to have opened worker sessions, read account usage or approved itself. Check the generated files before proceeding. The default conversation language is English; ask the PM to use your preferred language. Planning files remain English for consistency, without any promised token-saving ratio.
+Codex can also use `$project-os-start`. Trust the generated project in the client before expecting its project configuration to load. Inspect the installed files first. The root instructions are CLAUDE.md for Claude Code and AGENTS.md for Codex.
 
-## 4. Approve a concrete first task
+The PM should report the repository inventory, current decisions, model preferences and missing authority. Files on disk do not prove that workers were started or usage was measured. The initial capability mode stays manual until actual tools are observed.
 
-Read `planning/tasks/TB-001.md`. It proposes adding `--status unread|finished` to the CLI. Its status is `todo`, code permission is `pending`, and no tests for the proposed feature have been claimed as passed.
+## 4. Approve a task
 
-After reviewing scope, you can tell the PM:
+Read `planning/tasks/TB-001.md`. It proposes `--status unread|finished` for the reading list. The task starts as todo, with scope and code permission pending. After reviewing it, you can say:
 
 ```text
-Approve TB-001 scope and code changes in repos/catalog only, including
-focused tests and an independent QA pass. Use the configured lean profile.
-No commit, push, merge, deployment, paid service or external message is approved.
+Approve TB-001 scope and code/test/README changes in repos/catalog only,
+with an independent QA pass. Use local-folder mode.
+No Git writes, deployment, paid service or external message is approved.
 ```
 
-If using Git, separately authorise local Git initialization and task-branch creation for the example repositories; otherwise set the task's Branch to `none (local folder mode)`. The developer must never guess a branch. The PM records the approval source in the task and `planning/decisions.md`.
+PM records the real approval in the task and decisions file. Local-folder mode requires no branch operation. A Git workflow needs its own applicable approval and worktree check.
 
-## 5. Hand off to a named developer
+## 5. Developer, QA and review
 
-Baseline mode uses another terminal that **you** open in `trailboard-demo/repos/catalog`. Run `claude`, give the session the logical name `Trailboard : Catalog`, and paste the PM's self-contained brief. Include the absolute PM workspace path if it is outside the session's accessible directories; grant only the required additional directory using supported client permissions.
+Claude Code can use separate manual sessions with a self-contained task brief. Codex can use the installed role definitions through its available delegation tools. If named role selection is absent, pass the corresponding TOML role instructions in the delegated brief; if no delegation is available, use separate manual sessions. Include workspace/task/rule paths and the stopping point.
 
-The brief must identify the task, root `CLAUDE.md`, repository `CLAUDE.md`, engineering standard, allowed branch and output. The developer reads the complete task, writes one small step and updates its single Hand-off block. Return the task path and status to PM manually. A label in the board is a role name, not a persistent session identifier.
+The developer implements only approved scope, runs tests and saves a handoff. QA waits until that lane is free, then checks each criterion and writes its own evidence. Reviewer returns findings to PM without editing the candidate. PM checks completeness before any Git decision.
 
-For QA, release the catalog lane and open a fresh `Trailboard : QA` session at the PM root. It follows `planning/qa/README.md`, reruns criteria and writes its own evidence. If native delegation is verified and explicitly enabled, the PM may use that adapter instead. See [Claude Code capabilities](docs/claude-code.md).
+In both mode, there is still only one planning directory. Finish and save a step before switching clients. Never run a second writer in the same repository merely because it uses a different client.
 
-## 6. Use your own project
+## 6. Use your own repositories
 
-From the distribution root:
+Omit `--example`, set `--name "My Project"` and choose a runtime. Add repository paths and owners to .project-os.json during onboarding. Existing repositories keep their current files. Review and merge entry rules manually using the [repository starter](templates/repository/README.md) and [customization guide](docs/customization.md).
 
-```sh
-node scripts/init.mjs --target ../my-project-pm --name "My Project" --profile lean
-```
+## Validate
 
-Edit the new `.project-os.json`: language, time zone, model tier mappings, repository paths and owners. Repository paths are relative children of the PM root; use `repos/api`, for example. To keep an existing repository elsewhere, follow the reviewed manual-copy procedure in [customization](docs/customization.md). Do not move or overwrite a real repository just to fit the example.
-
-Run the PM bootstrap. Inspect only manifests and top-level layout initially. The owning developer later verifies repository conventions against code in a scoped task. Unknown commands stay explicitly unverified and block code dispatch. An empty project starts with an architecture proposal and human approval.
-
-## Check your installation
-
-From the distribution root, replacing the destination if you chose another:
+From the distribution root, using the workspace you chose:
 
 ```sh
-node scripts/check.mjs --workspace ../trailboard-demo
+node scripts/check.mjs --workspace ../shared-demo
 node scripts/check.mjs
-node --test scripts/system.test.mjs
-node --test scripts/smoke.test.mjs
+node --test scripts/system.test.mjs scripts/smoke.test.mjs scripts/runtimes.test.mjs
 ```
 
-The first checks installed state and links; the second checks the distribution; the test suites exercise installation, failure paths and smoke verification offline. None executes an AI session. Follow the [authenticated smoke procedure](docs/authenticated-smoke.md) to test real separate role sessions; inspect [release readiness](release/READINESS.md) for actual results and remaining gaps.
+The [authenticated test guide](docs/authenticated-smoke.md) covers real session evidence for each runtime. Normal offline checks do not start models.
