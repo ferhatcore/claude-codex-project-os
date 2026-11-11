@@ -11,8 +11,8 @@ Both clients use the same planning directory, task files, decisions and reposito
 You need Node.js 22 or newer and the coding client you want to use. There are no npm packages to install.
 
 ```sh
-git clone https://github.com/ferhatcore/claude-code-project-os.git
-cd claude-code-project-os
+git clone https://github.com/ferhatcore/claude-codex-project-os.git
+cd claude-codex-project-os
 ```
 
 For Claude Code:

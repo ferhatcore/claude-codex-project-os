@@ -1,6 +1,6 @@
 # Verification record
 
-The source repository is public at [ferhatcore/claude-code-project-os](https://github.com/ferhatcore/claude-code-project-os). It uses the MIT License, Copyright (c) 2026 Ferhat Kosger. The owner approved publication and the shared Claude Code/Codex update on 2026-11-11.
+The source repository is public at [ferhatcore/claude-codex-project-os](https://github.com/ferhatcore/claude-codex-project-os). It uses the MIT License, Copyright (c) 2026 Ferhat Kosger. The owner approved publication and the shared Claude Code/Codex update on 2026-11-11.
 
 ## Local checks
 
@@ -10,7 +10,7 @@ All nine runtime/profile combinations installed successfully. Both mode retained
 
 ## Hosted checks
 
-[GitHub Actions run 43015330417](https://github.com/ferhatcore/claude-code-project-os/actions/runs/43015330417) passed on Windows and Ubuntu with Node.js 22 for commit `534270662e8db5ea006d72426ba4144e86330b9e`. Each job ran repository validation, all three suites and the standalone example suite. The evidence update following that run changes only release documentation and records.
+[GitHub Actions run 43015330417](https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43015330417) passed on Windows and Ubuntu with Node.js 22 for commit `534270662e8db5ea006d72426ba4144e86330b9e`. Each job ran repository validation, all three suites and the standalone example suite. The evidence update following that run changes only release documentation and records.
 
 ## Client sessions
 

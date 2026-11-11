@@ -125,9 +125,9 @@
   "publication_approved": true,
   "publication_scope": "public source repository",
   "publication_kind": "public source repository",
-  "repository_url": "https://github.com/ferhatcore/claude-code-project-os",
+  "repository_url": "https://github.com/ferhatcore/claude-codex-project-os",
   "hosted_ci": {
-    "url": "https://github.com/ferhatcore/claude-code-project-os/actions/runs/43015330417",
+    "url": "https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43015330417",
     "status": "completed",
     "conclusion": "success",
     "head_sha": "534270662e8db5ea006d72426ba4144e86330b9e",

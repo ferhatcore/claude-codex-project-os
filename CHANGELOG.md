@@ -1,5 +1,9 @@
 # Changelog
 
+## Repository rename — 2026-11-11
+
+The repository is now `ferhatcore/claude-codex-project-os`. Both clients remain in one project. Clone instructions and repository links use the new name; existing GitHub links redirect to it.
+
 ## Shared runtime support — 2026-11-11
 
 1. Added `--runtime claude|codex|both` with the original Claude default preserved.

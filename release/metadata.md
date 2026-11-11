@@ -2,7 +2,7 @@
 
 ## Repository name
 
-`claude-code-project-os`
+`claude-codex-project-os`
 
 ## Description
 
