@@ -19,4 +19,4 @@ jobs:
         with:
           node-version: '22'
       - run: node scripts/check.mjs
-      - run: node --test scripts/system.test.mjs
+      - run: node --test scripts/system.test.mjs scripts/smoke.test.mjs

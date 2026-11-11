@@ -83,6 +83,7 @@ From the distribution root, replacing the destination if you chose another:
 node scripts/check.mjs --workspace ../trailboard-demo
 node scripts/check.mjs
 node --test scripts/system.test.mjs
+node --test scripts/smoke.test.mjs
 ```
 
-The first checks installed state and links; the second checks the distribution; the third exercises installation and failure paths offline. None executes an AI session. Inspect [release readiness](release/READINESS.md) for the actual test environment and remaining gaps.
+The first checks installed state and links; the second checks the distribution; the test suites exercise installation, failure paths and smoke verification offline. None executes an AI session. Follow the [authenticated smoke procedure](docs/authenticated-smoke.md) to test real separate role sessions; inspect [release readiness](release/READINESS.md) for actual results and remaining gaps.

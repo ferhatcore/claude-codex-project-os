@@ -9,6 +9,7 @@ For changes, run:
 ```sh
 node scripts/check.mjs
 node --test scripts/system.test.mjs
+node --test scripts/smoke.test.mjs
 ```
 
 Exercise onboarding if paths or templates change. Add meaningful negative tests for installer/validator behavior, update the changelog, and document the actual client version for any integration claim. Prefer standard-library helpers over new dependencies.

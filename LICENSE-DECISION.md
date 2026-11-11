@@ -4,6 +4,8 @@ No `LICENSE` file is supplied because a redistribution grant has not been confir
 
 The owner must resolve this checklist with supporting evidence:
 
+The [2026-11-11 licensing audit](release/LICENSING-AUDIT.md) lists inspected components, upstream references and the exact unresolved holder/rights/attribution questions. Engineering inspection did not establish the missing legal authority.
+
 - [ ] Confirm authorship/ownership of the supplied system and authority to distribute adaptations, including any employer/client restrictions.
 - [ ] Identify external prompt/workflow/code sources, their licences and any required credits. Excluded source documents remain excluded unless separately cleared.
 - [ ] Confirm that remaining generic workflow text and newly prepared helper/example code can receive the chosen grant.

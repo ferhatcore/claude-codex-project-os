@@ -4,7 +4,7 @@
 
 Keep an AI-assisted project moving from a clear task to an independently checked result. A central PM coordinates named developer, QA and specialist sessions through small briefs, explicit approvals and durable hand-offs. Use it for a single repository or several related repositories.
 
-**Release status:** v1.0.0 candidate, prepared locally. Publication is blocked on ownership confirmation and a licence decision. This candidate is not yet licensed as open source. See [licensing](LICENSE-DECISION.md) and the [readiness report](release/READINESS.md).
+**Release status:** v1.0.0 candidate, finalized for local review on 2026-11-11. Publication still requires confirmed rights/licensing, a real authenticated Claude Code smoke test and owner approval. This candidate is not yet licensed as open source. See [remaining gates](release/BLOCKERS.md) and the [readiness report](release/READINESS.md).
 
 ## What you get
 
@@ -14,6 +14,7 @@ Keep an AI-assisted project moving from a clear task to an independently checked
 - Restartable context through task hand-offs, decisions and a board.
 - Configurable model tiers, effort preferences and usage policies.
 - A local installer, offline validation and a complete fictional two-repository example.
+- A reproducible authenticated-session test guide and an offline smoke-test helper.
 
 This is a workflow kit. It does not run a daemon, enforce a spending ceiling, create cloud resources or automatically control every Claude Code session. Files guide an assistant; tool permissions and human review remain necessary.
 
@@ -50,7 +51,8 @@ flowchart LR
     D --> S{Security review required?}
     S -->|yes| SEC[Independent security review]
     S -->|no| Q[Independent QA]
-    SEC --> Q
+    SEC -->|no blocking findings| Q
+    SEC -->|blocking findings| D
     Q -->|findings, at most two failed rounds| D
     Q -->|criteria verified| C[PM completeness check]
     C --> G[Human: commit / push / merge approval]
@@ -62,6 +64,8 @@ flowchart LR
 
 For example, `TB-001` proposes an optional status filter for a local reading-list CLI. The developer receives one task and branch, implements it and records evidence. QA checks every acceptance criterion against the files and test output. The PM reports gaps before requesting a concrete Git operation. A changed criterion is dated in the task before anyone continues. The example task starts as `todo`; it contains no fabricated execution history.
 
+Security and QA share the two-failed-cycle retry budget; a third cycle requires a revised plan and human authority.
+
 ## Repository map
 
 | Path | Purpose |
@@ -71,6 +75,7 @@ For example, `TB-001` proposes an optional status filter for a local reading-lis
 | [docs/workflows.md](docs/workflows.md) | Code, design, documents, QA and advanced review |
 | [docs/customization.md](docs/customization.md) | Profiles, model tiers, technologies and departments |
 | [docs/troubleshooting.md](docs/troubleshooting.md) | Recovery and common failures |
+| [docs/authenticated-smoke.md](docs/authenticated-smoke.md) | Real PM → Developer → QA → Review → Completion test procedure |
 | [templates/workspace/](templates/workspace/README.md) | Files installed into a new PM workspace |
 | [templates/repository/](templates/repository/README.md) | Evidence-based repository rule starter |
 | [examples/trailboard/](examples/trailboard/README.md) | Fictional project, fixtures and proposed task |

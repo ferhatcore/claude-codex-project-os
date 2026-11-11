@@ -9,5 +9,15 @@
   "authenticated_smoke_test": false,
   "smoke_evidence": null,
   "publication_approved": false,
-  "approval_reference": null
+  "approval_reference": null,
+  "reviewed_on": "2026-11-11",
+  "engineering_audit": "completed; see release/READINESS.md and release/validation.json",
+  "licensing_audit": "release/LICENSING-AUDIT.md",
+  "remaining_gate_actions": "release/BLOCKERS.md",
+  "authentication_check": {
+    "checked_on": "2026-11-11",
+    "command": "claude auth status --json",
+    "loggedIn": false,
+    "model_requests_executed": 0
+  }
 }

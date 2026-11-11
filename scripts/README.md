@@ -10,6 +10,10 @@ node scripts/check.mjs --workspace ../trailboard-demo
 node scripts/check.mjs --denylist /path/to/private-identifiers.json
 node scripts/check.mjs --release
 node --test scripts/system.test.mjs
+node --test scripts/smoke.test.mjs
+node scripts/smoke.mjs --prepare --target ../trailboard-smoke
+node scripts/smoke.mjs --check-auth
+node scripts/smoke.mjs --verify --workspace ../trailboard-smoke --phase baseline
 ```
 
 Installer options: `--target` required; `--name` optional; `--example` optional; `--profile lean|standard|heavy`, default lean; `--help`. Destination must not exist; its parent must already exist and have no symbolic-link ancestors. No overwrites, Git, Claude launch, network calls or external commands. On a copy failure the target may remain partially populated; preserve it for inspection and use a new destination after resolving the error.
@@ -19,3 +23,5 @@ Checker options: `--workspace PATH` validates installed controls and referenced 
 Default checks are offline. External URLs are syntax-checked, not fetched; the release review records any separate HTTP checks. The scanner uses known patterns, cannot identify every secret and cannot verify legal ownership or human consent. `--release` validates recorded declarations, not their truth; the owner must inspect the exact candidate. `.git`, `node_modules`, `.claude/settings.local.json`, logs, private environments and work/coverage directories are excluded from generic installed-workspace scans. Distribution scans include and reject private environment/key/log/local-settings artifacts. Do not assume either mode is a complete scan of product code or Git history.
 
 The tests use a temporary directory they create, exercise success/failure and clean it afterwards. They never execute fixture-configured test strings through a shell. Ordinary green checks do not imply permission to publish.
+
+The smoke helper's `--prepare` makes a fresh fictional workspace and five role prompts; `--check-auth` prints only a sanitised client-reported login state; `--verify` executes fixed local Node commands after checking the fixture marker/configuration. `baseline` requires the expected unimplemented filter failures; `candidate` requires working filter behavior. Read [authenticated smoke instructions](../docs/authenticated-smoke.md) before executing model-written code. No helper invokes an AI model, manufactures human approval, sets release status or proves that real role sessions ran.

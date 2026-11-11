@@ -23,3 +23,5 @@ There were no explicit copyright notices in the supplied archive to reproduce. T
 ## Outstanding decision
 
 Before public distribution, the owner must confirm rights to adapt and distribute the retained methodology/expression, identify any required attribution and choose a licence. Excluded internal/source-specific material stays excluded even if the generic candidate is later approved. Follow [LICENSE-DECISION.md](LICENSE-DECISION.md); unresolved rights block the whole candidate from public release.
+
+Finalization on 2026-11-11 preserved the original local commit and added smoke tooling, tests and release documentation in a separate delivery checkout. No original archive material or third-party runtime implementation was added. See the [licensing/attribution audit](release/LICENSING-AUDIT.md) for pinned CI action references and remaining questions. The generic builder identity in Git is a preparation identity, not a claim to copyright ownership.

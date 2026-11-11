@@ -1,49 +1,53 @@
-# Release readiness — v1.0.0 candidate
+# Release readiness — v1.0.0 local final delivery
 
-Prepared on 2026-11-10 for local owner review. The repository is implemented and locally validated. **Public distribution is blocked** until rights/licensing and the remaining release gates below are resolved. No remote repository, public release, tag, cloud resource or paid model request was created.
+Finalization reviewed 2026-11-11. The existing workflow, installer and example were preserved in a separate delivery checkout. **Release state remains candidate.** Public distribution still requires genuine legal clearance, authenticated-session evidence and explicit publication approval. The `final` directory/archive suffix is a delivery label, not a declaration that those gates passed.
 
-## Source and privacy review
+## Completed engineering work
 
-- Read all twelve supplied Markdown files before release construction; the [source review](../docs/source-review.md) records the architectural assessment and redesign.
-- Compared all extracted files byte-for-byte with their archive entries; all twelve matched. The original archive was opened read-only and remains outside the release. Hash/inventory evidence is retained privately outside this repository.
-- The original documents contain private project context and no bundled licence or explicit copyright notice. No original file or source-specific implementation is distributed. Absence of a notice does not establish rights.
-- Scanned all twelve source files with the same known credential-pattern checks: zero heuristic secret findings. Private contextual identifiers were found in the source and removed from the candidate.
-- Scanned the candidate with known credential patterns, personal-path checks and an external private identifier denylist: zero findings. The denylist and source evidence are not bundled. This is a bounded heuristic review, not a guarantee that all confidential material can be detected.
-- Reviewed the generic helper code, template instructions and fictional fixtures for scope, unsupported automation claims, contradictions and unsafe production assumptions.
+- Added a reproducible [real-session smoke procedure](../docs/authenticated-smoke.md): PM → Developer → QA → Reviewer → Completion, with approval refusal, context recovery, actual model selection and negative/correction checks.
+- Added `scripts/smoke.mjs` for isolated fixture preparation, sanitised auth status and fixed local CLI/test verification. It never starts a model session or changes release approvals.
+- Preserved the original eighteen system tests; added eleven smoke-helper tests. Both suites now run in the pinned Windows/Linux CI workflow.
+- Reviewed instructions, configuration examples, Mermaid flow, GitHub presentation, contribution/security policies and publication commands. Clarified read-only reviewer reporting and shared Security/QA retry limits.
+- Completed a [licensing/dependency audit](LICENSING-AUDIT.md) with exact unresolved owner questions and upstream action licence references. No runtime dependency was added and no MIT grant was assumed.
+- Added [per-gate actions](BLOCKERS.md), refreshed release evidence and retained every unresolved gate in the existing release validator.
 
-## Validation actually run
+## Actual validation results
 
-Environment: Windows, Node.js v24.14.0, Git 2.53.0.windows.1. Claude Code v2.1.110 was inspected with `--version` and `--help`; no model request was executed. The supported helper baseline is Node.js 22+, with hosted Node 22 validation configured but not yet executed.
+Local environment: Windows, Node.js v24.14.0, Git 2.53.0.windows.1, Claude Code 2.1.110. All checks below were actually executed, including from a fresh local clone of the finalized implementation.
 
-| Check | Outcome |
+| Check | Result |
 |---|---|
-| `node scripts/check.mjs` | Passed: required files, local Markdown links/anchors, JSON/config/task consistency, entry size, metadata and CI policy |
-| `node scripts/check.mjs --denylist` with the private external list | Passed: zero credential/private-identifier/template-marker findings in the candidate |
-| `node --test scripts/system.test.mjs` | 18 tests passed; zero failures, skips or cancellations |
-| Standalone installed example CLI | Printed the expected three fictional titles with exit 0 |
-| Standalone installed example suite | 3 tests passed; zero failures or skips |
-| Isolated generic setup and lean/standard/heavy example setup | All passed; correct caps and files; no Git/Claude/network actions by installer |
-| Negative checks | Existing targets preserved; unknown/duplicate/missing options refused; path escape and symlinks rejected; invalid config, links, markers, secrets, local artifacts and inconsistent task state detected |
-| Deterministic workflow rehearsal | Proposed task → synthetic scoped approval → build → actual failing filter check → `qa_failed` → local fix → independent command/suite checks → evidenced `done`; temporary fixture only |
-| External documentation links | Eight official documentation URLs returned HTTP 200 |
-| CI action references | Both pinned upstream commit API endpoints returned HTTP 200 |
-| `node scripts/check.mjs --release` | Failed as intended: ten missing declaration/evidence/licence/state requirements; ordinary green checks cannot declare this candidate publishable |
+| `node scripts/check.mjs` | Pass: required files, Markdown links/anchors, JSON/config/task schemas, entry length, CI policy and metadata |
+| Private denylist + known-pattern secret/personal-path scan | Pass: zero findings; private denylist stays outside distribution |
+| `node --test scripts/system.test.mjs` | 18 passed, 0 failed, 0 skipped |
+| `node --test scripts/smoke.test.mjs` | 11 passed, 0 failed, 0 skipped |
+| Fresh-clone example installation + workspace check | Pass: new isolated destination, correct files, no Git/model/network action by installer |
+| Fresh-installed example CLI and suite | Expected three titles; 3 tests passed, 0 failed or skipped |
+| Generic and lean/standard/heavy installations | All passed within system tests; caps preserved |
+| Smoke preparation and `--phase baseline` | Pass: actual baseline CLI/suite executed; the two unimplemented filters failed as expected, fixture bytes unchanged |
+| Smoke `--phase candidate` on unimplemented fixture | Fails as required; helper cannot promote the baseline or manufacture task/release completion |
+| Completed-filter verifier test | Pass on a temporary deterministic implementation, with authenticated/session/manual criteria still explicitly unproven |
+| Strict/refusal checks | Existing targets, path escapes, symlinks, invalid config/flags/links, secret markers, local artifacts, inconsistent task state, skipped tests and fixture mutations handled correctly |
+| GitHub Actions YAML | Parsed with an available local YAML parser; triggers, read-only permissions, credential persistence, matrix, pinned references and both suites checked |
+| External Markdown URLs | All 11 unique official/reference URLs returned HTTP 200 on 2026-11-11 |
+| `node scripts/check.mjs --release` | Exit 1, ten genuine unresolved findings; gate not weakened or bypassed |
 
-The deterministic rehearsal executes real local Node commands but simulates role transitions. It is **not** an authenticated multi-session Claude Code run or a human approval record. The checked-in TB-001 remains a pending proposal, with no fabricated QA history. Test-created temporary directories are removed; a separate isolated onboarding fixture is retained privately for inspection.
+Tests use real local processes and fixtures. Their simulated role transitions, approval inputs and deterministic filter implementation are **not** authenticated Claude Code sessions. The checked-in example task stays `todo` with code/scope permission pending.
 
-The two test findings corrected during preparation were nested Node test subprocess reporting and exclusion of private environment/local artifacts from distribution scanning. Regression coverage now checks both behaviors.
+Node 22/Linux/hosted GitHub Actions execution is not claimed. No suitable independent Linux/Node 22 test environment was available locally; Windows Node 24 was tested. Hosted Windows/Linux Node 22 CI must run after approved remote creation. The Mermaid source was reviewed; no graphical Mermaid render was run.
 
-## Remaining release gates
+## Authentication and remaining gates
 
-1. **Rights/licence:** owner must confirm adaptation/distribution rights, review external sources/attribution, choose the accurate copyright holder and licence, and add full `LICENSE`. See [licence checklist](../LICENSE-DECISION.md). Until then, the entire candidate stays local; excluded original material remains excluded.
-2. **Authenticated smoke:** `claude auth status` did not yield available authenticated status. Complete a real PM → developer → QA exercise in a disposable project after interactive authentication. Do not replace this with the deterministic rehearsal or copy private transcripts into the public repository.
-3. **Owner approval:** review the exact final diff and record explicit permission before remote creation, push or publication. No publication approval has been inferred.
-4. **GitHub configuration and CI:** after approval, enable private vulnerability reporting, configure applicable required checks and inspect hosted Windows/Linux Node 22 runs before tagging the stable release. Local Windows Node 24 success does not establish Linux/Node 22 execution.
+`claude auth status --json` and the sanitising helper explicitly reported `loggedIn: false`. No authenticated model request was attempted, and no credential value or account identifier was read/exported by our scripts. A real multi-session smoke test therefore remains blocked on the human's interactive login and execution. Follow the included guided procedure; a successful login-status response alone is insufficient evidence.
 
-Update [status.json](status.json) only from actual owner decisions and execution evidence. The release gate checks the record's structure, not legal truth or the authenticity of consent. The owner remains responsible for final review.
+The owner must also confirm the actual rights holder, adaptation/distribution authority, external-source/contributor obligations, licence and notice text. The legal declarations remain false/pending. Only an actual owner decision may change them. Finally, public repository creation, pushes and releases require approval of the exact final candidate. See [BLOCKERS.md](BLOCKERS.md) for each field and precise action.
 
-## Git and publication
+## Source, privacy and Git
 
-A clean local Git repository is prepared on `codex/release-v1.0.0` with one initial commit. The commit uses the explicitly generic identity `Local Release Builder` and an `.invalid` email so preparation does not expose the owner's configured personal email or assert a legal copyright holder. The owner may amend that identity before publication. No remote or tag is configured.
+The earlier source review read all twelve supplied Markdown files, compared extracted bytes to the archive and excluded the originals and private implementation details. Finalization introduced no raw source files, accounts, customer data or production integration. Source-specific identifiers are held only in an external private denylist used for scanning.
 
-Exact post-approval commands and ordering are in [release checklist](CHECKLIST.md). Draft [release notes](v1.0.0.md), [GitHub metadata/announcement/portfolio summary](metadata.md) and [genuine adoption tracking](adoption.md) are included. Do not claim this candidate is already licensed open source, publicly available or adopted.
+Known-pattern scans are heuristic; absence of findings is not a universal confidentiality or ownership guarantee. Raw model transcripts, auth output, test sandboxes and development logs are excluded from the package. Git committed-content/history scans use the private denylist without reporting matched values.
+
+The local branch is `codex/finalize-v1.0.0`, retaining the original preparation commit and one finalization commit. Both use the clearly generic `Local Release Builder` identity with an `.invalid` email; this is not a copyright declaration. There is no remote or tag. The ZIP contains committed repository files under `claude-code-project-os/`, excluding `.git` metadata. Exact post-approval commands, including ZIP initialization, are in [CHECKLIST.md](CHECKLIST.md).
+
+Machine-readable execution evidence is in [validation.json](validation.json); decision flags and their explanation references are in [status.json](status.json). Read those records as evidence declarations, never as substitutes for genuine human consent or legal authority.

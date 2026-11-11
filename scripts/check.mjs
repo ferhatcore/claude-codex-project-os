@@ -18,7 +18,8 @@ export function validate(root = distributionRoot, { workspace = false, release =
   const required = workspace ? workspaceFiles : ['README.md','QUICKSTART.md','CONTRIBUTING.md','SECURITY.md',
     'PROVENANCE.md','LICENSE-DECISION.md','CHANGELOG.md','.gitignore','.gitattributes',
     'docs/architecture.md','docs/workflows.md','docs/customization.md','docs/troubleshooting.md','docs/claude-code.md',
-    'scripts/init.mjs','scripts/check.mjs','scripts/lib.mjs','scripts/system.test.mjs',
+    'scripts/init.mjs','scripts/check.mjs','scripts/lib.mjs','scripts/system.test.mjs','scripts/smoke.mjs','scripts/smoke.test.mjs',
+    'docs/authenticated-smoke.md','release/LICENSING-AUDIT.md','release/BLOCKERS.md',
     '.github/workflows/validate.yml','release/metadata.md','release/READINESS.md','release/status.json','release/CHECKLIST.md','release/v1.0.0.md','release/adoption.md',
     ...workspaceFiles.map(f => `templates/workspace/${f}`),
     'examples/trailboard/.project-os.json','examples/trailboard/planning/tasks/TB-001.md'];

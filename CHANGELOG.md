@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0 — local finalization 2026-11-11
+
+Candidate status retained; not published or tagged.
+
+- Preserved the existing workflow, example, installer and eighteen-test system suite.
+- Added a guided real-session smoke procedure, isolated fixture preparation, sanitised auth preflight and independent CLI behavior verification.
+- Added eleven smoke-helper regression tests and included both suites in Windows/Linux CI.
+- Audited runtime dependencies, pinned CI action licences, provenance and open copyright questions.
+- Updated actual evidence and per-gate owner actions without bypassing release validation.
+
 ## 1.0.0 — candidate prepared 2026-11-10
 
 Prepared locally; not yet published or tagged.

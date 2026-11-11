@@ -5,8 +5,8 @@ The local repository is prepared for review. Do not push, create a remote reposi
 - [ ] Resolve [ownership and licence](../LICENSE-DECISION.md); add the approved full `LICENSE` and attribution.
 - [ ] Review every staged file and the initial commit; replace the generic local build identity if desired without inventing authorship.
 - [ ] Update README, changelog and release notes to the approved licence/date/status.
-- [ ] Run `node scripts/check.mjs` and `node --test scripts/system.test.mjs`.
-- [ ] Perform an authenticated Claude Code PM → developer → QA smoke run on the disposable example; record client/model and actual evidence without private transcripts.
+- [ ] Run `node scripts/check.mjs`, `node --test scripts/system.test.mjs` and `node --test scripts/smoke.test.mjs`.
+- [ ] Follow the [real-session smoke procedure](../docs/authenticated-smoke.md): PM → Developer → QA → Reviewer → Completion, including permission, context and negative/correction checks. Record real client/model evidence without private transcripts.
 - [ ] Review secret/privacy scans and a final staged diff; use an additional specialist secret scanner if available.
 - [ ] Set owner/licence/evidence fields in `release/status.json`; attach safe references.
 - [ ] Obtain final publication approval for the exact reviewed candidate and record its reference.
@@ -22,6 +22,7 @@ From the local repository root, after the checklist decisions and edits above:
 ```sh
 node scripts/check.mjs
 node --test scripts/system.test.mjs
+node --test scripts/smoke.test.mjs
 node scripts/check.mjs --release
 git status --short
 git diff --check
@@ -29,7 +30,7 @@ git add .
 git commit -m "Finalize v1.0.0 release approval and licensing"
 ```
 
-Skip the commit only if there are no changes. The initial branch is `codex/release-v1.0.0`. Rename it before first push, authenticate GitHub CLI interactively, and create the approved public repository:
+Skip the commit only if there are no changes. The final delivery branch is `codex/finalize-v1.0.0` and retains the original preparation commit. Rename it before first push, authenticate GitHub CLI interactively, and create the approved public repository:
 
 ```sh
 git branch -M main
@@ -48,3 +49,5 @@ gh release create v1.0.0 --verify-tag --title "Claude Code Project OS v1.0.0" --
 ```
 
 The default account creates the repository; for an organisation, use its approved `OWNER/claude-code-project-os` name. These are instructions only; none was executed during preparation. If approval excludes any step, stop before that step. Do not repurpose these commands as approval.
+
+If you start from the ZIP rather than the local Git checkout, the archive intentionally contains no `.git`. From its extracted repository root, first run `git init --initial-branch=main`, review the public commit name/email, then `git add .` and `git commit -m "Prepare Claude Code Project OS v1.0.0"`. This initial local commit is preparation only; resolve every gate and obtain publication approval before the remote/push/release commands above.
