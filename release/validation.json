@@ -25,9 +25,13 @@
     "skipped": 0
   },
   "fresh_clone": {
-    "status": "pending for current dual-runtime commit",
-    "previous_published_commit": "f4d794f756aa86969c9edd5c0a8633252f49027f",
-    "note": "Earlier clone evidence covered the Claude-only implementation. Current dual-runtime installation tests cover all runtime/profile combinations; a fresh clone is checked after push."
+    "validation_passed": true,
+    "all_three_test_suites_passed": true,
+    "example_install_and_tests_passed": true,
+    "runtime": "both",
+    "head_sha": "534270662e8db5ea006d72426ba4144e86330b9e",
+    "implementation_sha256": "86cfc3f6495178ddf88a25c9c915afa6a9e6463e9080baadc4151c6098749553",
+    "note": "Digest covers scripts, templates, examples and CI using sorted POSIX path + NUL + file bytes + NUL. Only release evidence changes after this clone check."
   },
   "smoke_baseline": {
     "executed": true,
@@ -106,7 +110,7 @@
   ],
   "cross_platform": {
     "local_windows_node24": "passed",
-    "hosted_windows_linux_node22_ci": "pending for dual-runtime commit"
+    "hosted_windows_linux_node22_ci": "passed in GitHub Actions"
   },
   "release_gate": {
     "exit_code": 1,
@@ -123,16 +127,15 @@
   "publication_kind": "public source repository",
   "repository_url": "https://github.com/ferhatcore/claude-code-project-os",
   "hosted_ci": {
-    "url": "https://github.com/ferhatcore/claude-code-project-os/actions/runs/43010429439",
+    "url": "https://github.com/ferhatcore/claude-code-project-os/actions/runs/43015330417",
     "status": "completed",
     "conclusion": "success",
-    "head_sha": "144179953f1251080b757e01cba3b3073c9e8824",
+    "head_sha": "534270662e8db5ea006d72426ba4144e86330b9e",
     "platforms": [
       "Windows",
       "Ubuntu"
     ],
-    "node": "22",
-    "scope": "previous Claude-only implementation; dual-runtime run pending"
+    "node": "22"
   },
   "runtime_adapter_tests": {
     "passed": 11,
