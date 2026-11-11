@@ -8,8 +8,8 @@
   "attribution_reviewed": true,
   "authenticated_smoke_test": false,
   "smoke_evidence": null,
-  "publication_approved": false,
-  "approval_reference": null,
+  "publication_approved": true,
+  "approval_reference": "release/OWNER-DECISION.md — public source upload approved on 2026-11-11",
   "reviewed_on": "2026-11-11",
   "engineering_audit": "completed; see release/READINESS.md and release/validation.json",
   "licensing_audit": "release/LICENSING-AUDIT.md",
@@ -24,5 +24,7 @@
   "copyright_year": 2026,
   "license_evidence": "release/OWNER-DECISION.md — explicit MIT selection",
   "attribution_evidence": "release/LICENSING-AUDIT.md",
-  "smoke_test_blocker": "Owner postponed Claude login and real model testing; current usage allowance unavailable."
+  "smoke_test_blocker": "Owner postponed Claude login and real model testing; current usage allowance unavailable.",
+  "publication_scope": "Public source repository at ferhatcore/claude-code-project-os; no claim of a completed authenticated Claude test.",
+  "repository_url": "https://github.com/ferhatcore/claude-code-project-os"
 }
