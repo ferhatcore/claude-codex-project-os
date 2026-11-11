@@ -22,6 +22,6 @@ There were no explicit copyright notices in the supplied archive to reproduce. T
 
 ## Owner decision
 
-On 2026-11-11, Ferhat Kosger identified himself as the project creator/copyright holder and explicitly selected MIT with the notice Copyright (c) 2026 Ferhat Kosger. See [OWNER-DECISION.md](release/OWNER-DECISION.md), [LICENSE-DECISION.md](LICENSE-DECISION.md) and [LICENSE](LICENSE). Excluded internal/source-specific material remains excluded. Authenticated integration testing and publication approval remain pending.
+On 2026-11-11, Ferhat Kosger identified himself as the project creator/copyright holder and explicitly selected MIT with the notice Copyright (c) 2026 Ferhat Kosger. See [OWNER-DECISION.md](release/OWNER-DECISION.md), [LICENSE-DECISION.md](LICENSE-DECISION.md) and [LICENSE](LICENSE). Excluded internal/source-specific material remains excluded. The owner subsequently approved public source upload to ferhatcore/claude-code-project-os on 2026-11-11. Authenticated integration evidence is tracked separately in the release record.
 
 Finalization on 2026-11-11 preserved the original local commit and added smoke tooling, tests and release documentation in a separate delivery checkout. No original archive material or third-party runtime implementation was added. See the [licensing/attribution audit](release/LICENSING-AUDIT.md) for pinned CI action references and the resolved owner decision. The generic builder identity in Git is a preparation identity, not a claim to copyright ownership.

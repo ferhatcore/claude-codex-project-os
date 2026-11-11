@@ -1,6 +1,6 @@
 # Quickstart
 
-Use a fresh local directory first. This project is [MIT-licensed](LICENSE), Copyright (c) 2026 Ferhat Kosger. Real authenticated-session validation and final publication approval remain pending; see [release status](release/READINESS.md).
+Use a new local directory for the first setup. This project uses the [MIT License](LICENSE), Copyright (c) 2026 Ferhat Kosger.
 
 ## 1. Check prerequisites
 

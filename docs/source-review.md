@@ -36,4 +36,4 @@ Company/customer/partner identities, internal repository URLs, private infrastru
 
 ## Maintainer review limits
 
-The sources describe a broader original environment than this kit implements. This release packages its portable file contracts and helpers; it does not ship a live board server, native session adapter, scheduler or production integration. Offline setup and deterministic workflow rehearsal are tested. MIT licensing and owner attribution are now complete. Authenticated model execution, hosted CI and publication approval remain explicit release gates.
+The sources describe a broader original environment than this kit implements. This release packages its portable file contracts and helpers; it does not ship a live board server, native session adapter, scheduler or production integration. Offline setup and deterministic workflow rehearsal are tested. MIT licensing and owner attribution are now complete. Public source upload was approved and completed on 2026-11-11. Hosted Windows and Linux CI passed. Authenticated model execution remains a separate release check.

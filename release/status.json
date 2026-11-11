@@ -24,7 +24,23 @@
   "copyright_year": 2026,
   "license_evidence": "release/OWNER-DECISION.md — explicit MIT selection",
   "attribution_evidence": "release/LICENSING-AUDIT.md",
-  "smoke_test_blocker": "Owner postponed Claude login and real model testing; current usage allowance unavailable.",
+  "smoke_test_blocker": "Authenticated Claude session evidence pending.",
   "publication_scope": "Public source repository at ferhatcore/claude-code-project-os; no claim of a completed authenticated Claude test.",
-  "repository_url": "https://github.com/ferhatcore/claude-code-project-os"
+  "repository_url": "https://github.com/ferhatcore/claude-code-project-os",
+  "published": true,
+  "publication_kind": "public source repository",
+  "published_on": "2026-11-11",
+  "default_branch": "main",
+  "hosted_ci": {
+    "url": "https://github.com/ferhatcore/claude-code-project-os/actions/runs/43010429439",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "144179953f1251080b757e01cba3b3073c9e8824",
+    "platforms": [
+      "Windows",
+      "Ubuntu"
+    ],
+    "node": "22"
+  },
+  "private_vulnerability_reporting": true
 }

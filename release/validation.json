@@ -99,8 +99,8 @@
   ],
   "cross_platform": {
     "local_windows_node24": "passed",
-    "linux_node22": "not run locally",
-    "hosted_windows_linux_node22_ci": "configured; not run"
+    "linux_node22": "passed in GitHub Actions",
+    "hosted_windows_linux_node22_ci": "passed in GitHub Actions"
   },
   "release_gate": {
     "exit_code": 1,
@@ -109,9 +109,22 @@
   },
   "rights_confirmed": true,
   "license": "MIT",
-  "published": false,
+  "published": true,
   "copyright_holder": "Ferhat Kosger",
   "owner_decision": "release/OWNER-DECISION.md",
   "publication_approved": true,
-  "publication_scope": "public source repository"
+  "publication_scope": "public source repository",
+  "publication_kind": "public source repository",
+  "repository_url": "https://github.com/ferhatcore/claude-code-project-os",
+  "hosted_ci": {
+    "url": "https://github.com/ferhatcore/claude-code-project-os/actions/runs/43010429439",
+    "status": "completed",
+    "conclusion": "success",
+    "head_sha": "144179953f1251080b757e01cba3b3073c9e8824",
+    "platforms": [
+      "Windows",
+      "Ubuntu"
+    ],
+    "node": "22"
+  }
 }

@@ -12,12 +12,12 @@ After receiving a summary of MIT's reuse, distribution, commercial-use and notic
 
 The repository attribution audit identified no additional notice required for bundled third-party implementations, because none is bundled; upstream CI references remain documented separately. This record does not invent statements about agreements or material outside the supplied project.
 
-The owner postponed Claude login and reported no current usage allowance available for the real model test. No paid-provider workaround was attempted. The authenticated smoke gate remains false.
+The authenticated smoke gate is recorded separately from the licence decision. No model test result is inferred from ownership approval.
 
 MIT selection does not approve creating a public repository, pushing commits or publishing a release. Those actions remain separate from this local licensing decision.
 
 ## 2026-11-11 — public source upload
 
-The owner explicitly requested a public GitHub repository and confirmed the account name is now ferhatcore, renamed from the earlier account label. This authorises creating the repository and uploading the source with a plain description.
+The owner explicitly requested a public source repository under ferhatcore. This authorises repository creation and source upload with a plain description.
 
 The authenticated Claude test remains deferred. This approval does not turn offline results into a completed model integration test. The source can be published without claiming that the stable release gate has passed.
