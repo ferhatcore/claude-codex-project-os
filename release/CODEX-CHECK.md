@@ -1,21 +1,29 @@
-# Codex adapter checks
+# Codex workflow verification
 
-Checked on 2026-11-11 with Codex CLI 0.147.0 in isolated Trailboard workspaces. Authentication was already available. Private transcripts and account details are excluded from this repository.
+The real Codex desktop task sequence completed on 2026-11-11 in a disposable Trailboard installation. The PM used the installed role instructions with generic native delegation. Five separate workers ran sequentially; no two owned the Catalog lane together. Raw transcripts, account details and the exercised workspace are excluded from this repository.
 
-## Observed behavior
+## Observed results
 
-The client read the generated AGENTS.md, START.md, configuration, role definitions, skill and task. It identified pending code authority and stopped before implementation. The fixture was unchanged.
+| Stage | Actual result |
+|---|---|
+| Missing authority | An authenticated CLI Developer checkpoint read pending scope/code permission and stopped without changes. |
+| Baseline QA | A separate worker ran 3 passing baseline tests and reproduced both unimplemented filter failures. |
+| Tests-only Developer | Added meaningful tests, ran 23: 19 passed, 4 failed before implementation. Saved one recoverable Hand-off and stopped. |
+| Fresh Developer | Read that Hand-off in a new context, retained the tests unchanged, implemented filtering and README. All 23 tests and 15 real CLI cases passed. |
+| Independent candidate QA | All 23 tests, 19 actual CLI cases and six acceptance criteria passed. Fixture hash/order, coverage, README and scope were checked independently. |
+| Read only Reviewer | No blocking findings. All 57 pre-review files remained byte-identical; the PM independently confirmed this. |
+| PM completeness | Inspected QA/review evidence, ran the seven-case candidate verifier and validated the final 59-file workspace: zero findings. Fixture Git/deployment stayed pending. |
 
-The installed client's delegation interface had no named agent selector. The PM therefore passed the complete installed QA instructions through its generic native delegation tool. A separate worker inspected the unfinished example, returned acceptance gaps and was stopped after completion. This proves the read only delegation path; it does not prove a named custom agent type was selected.
+The filter implementation was exercised only in the disposable copy. The distributed example remains the original starting exercise with its proposed task and pending permissions. The four pre-implementation test failures were not counted as failed reviews of a finished candidate.
 
-That worker correctly distinguished static inspection from executed tests. Its attempts to launch local checks were refused by the host policy. No executed QA suite is claimed for that worker.
+## Client and configuration limits
 
-A separate approved development attempt was blocked by the effective read only tool policy despite requesting workspace write mode. It stopped before starting developer workers or changing product files. The full PM, Developer, QA and Reviewer build sequence remains incomplete. No permissions were bypassed.
+The desktop route passed. A separate nested Codex CLI 0.147.0 invocation rejected in-scope patch paths as outside the project and stopped before dispatch. No policy was bypassed, and the desktop result is not labelled a CLI write success.
+
+Named custom agent selection was not exposed by the available tools, so each generic worker received its complete installed role instructions. Exact inherited model, effort and account usage were not exposed and remain unknown. Sequential dispatch was observed; role text is not an enforced filesystem sandbox.
+
+No authenticated Claude Code workflow was run. The shared stable release declarations remain pending; this test does not grant release or deployment approval.
 
 ## Automated checks
 
-The local Node suites passed 42 system, helper and runtime tests plus 3 standalone example tests. They cover all nine runtime/profile combinations, shared state in both mode, legacy default behavior, generated entries, role/skill metadata, worker caps and refusal paths. These tests run directly outside the model session and are separate from its policy refusal.
-
-The four generated agent files and worker cap configuration also parsed successfully with Python's TOML parser. The workspace validator checks the emitted metadata subset and policy consistency; it is not a general TOML parser.
-
-Claude Code's authenticated build sequence was not run as part of this adapter update. The stable release gate remains unchanged. See [READINESS.md](READINESS.md) and [status.json](status.json) for the current evidence.
+The distribution's 45 tests passed with zero failures or skips. Windows and Ubuntu Node.js 22 jobs also passed in [GitHub Actions](https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43018536749). The four agent definitions and worker-cap configuration previously parsed with Python tomllib. Machine-readable stages and exercised-file hashes are in [validation.json](validation.json).

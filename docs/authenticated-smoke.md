@@ -78,4 +78,6 @@ Open `codex` at that generated root and invoke `$project-os-start`. Use the same
 
 Use `AGENTS.md` for Codex, not Claude's permission-mode flags. Real tool permissions come from the parent client. Run one worker at a time, wait and close it before starting the next role. Check the first unapproved attempt stops, then record a real applicable approval before implementation. Save a handoff and resume from it in another session to check continuity.
 
+Implementation needs a session that can write the generated workspace. Record a rejected nested CLI path as a CLI failure. A separate desktop session can exercise the same installed workflow with its existing authorized access, but its result must be labelled as a desktop run. Keep the client and tool route in the evidence; neither result substitutes for the other.
+
 For both mode, the two clients use the same planning directory. Do not test simultaneous writers in a shared lane. A result from one client is evidence only for that client and observed tool path. Record authenticated results per runtime; do not treat one completed Codex test as a completed Claude Code test.

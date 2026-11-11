@@ -30,3 +30,5 @@ The adapter follows OpenAI Docs reviewed on 2026-11-11:
 3. [Custom subagents and inherited permissions](https://learn.chatgpt.com/docs/agent-configuration/subagents).
 
 Client support depends on the installed version and managed configuration. Validate the generated workspace with `node scripts/check.mjs --workspace ../codex-demo` from the distribution root.
+
+The [verification record](../release/CODEX-CHECK.md) records the actual client and delegation path used in the fixture test. [OpenAI's permission documentation](https://learn.chatgpt.com/docs/permissions) describes the client settings; this kit's role instructions do not grant filesystem access.

@@ -10,11 +10,11 @@ All nine runtime/profile combinations installed successfully. Both mode retained
 
 ## Hosted checks
 
-[GitHub Actions run 43015330417](https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43015330417) passed on Windows and Ubuntu with Node.js 22 for commit `534270662e8db5ea006d72426ba4144e86330b9e`. Each job ran repository validation, all three suites and the standalone example suite. The evidence update following that run changes only release documentation and records.
+[GitHub Actions run 43018536749](https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43018536749) passed on Windows and Ubuntu with Node.js 22 for commit `1559874afe3f45a04efe6a02e5774919ae0a896f`. Each job ran repository validation, all three suites and the standalone example suite. Subsequent changes update documentation and verification records; the tested implementation digest is unchanged.
 
 ## Client sessions
 
-A real Codex CLI bootstrap and a native read only QA delegation completed. The full build flow was blocked by the effective tool policy. [CODEX-CHECK.md](CODEX-CHECK.md) distinguishes those observations from the direct Node tests. No authenticated Claude build sequence was run.
+The real Codex desktop role sequence completed: tests-only Developer, a fresh Developer continuation, independent candidate QA, read only review and PM completeness. QA passed 23 tests, 19 CLI cases and all six criteria. The separate nested CLI write route remained blocked. [CODEX-CHECK.md](CODEX-CHECK.md) distinguishes those observations from the direct Node tests. No authenticated Claude build sequence was run.
 
 These results describe the checks that ran. Complete authenticated workflow evidence remains a separate field in [status.json](status.json), and the stable release validator is unchanged.
 

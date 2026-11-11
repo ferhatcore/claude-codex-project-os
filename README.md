@@ -94,6 +94,8 @@ node --test examples/trailboard/repos/catalog/catalog.test.mjs
 
 The checks cover all three runtime choices, all three worker profiles, shared task state, generated agent files, installation refusals, configuration and fixture behavior. GitHub Actions runs the suites on Windows and Linux with Node.js 22.
 
+The [Codex verification record](release/CODEX-CHECK.md) lists the client sessions, task results and remaining limits.
+
 ## License
 
 [MIT](LICENSE). Copyright (c) 2026 Ferhat Kosger.

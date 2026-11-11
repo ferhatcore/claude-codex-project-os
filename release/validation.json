@@ -49,7 +49,9 @@
       "loggedIn": true,
       "source": "codex login status and real authenticated CLI sessions",
       "model_requests_executed": true,
-      "full_build_flow_completed": false
+      "full_build_flow_completed": true,
+      "completed_client": "Codex desktop",
+      "nested_cli_build_flow_completed": false
     }
   },
   "isolated_profiles": [
@@ -127,10 +129,10 @@
   "publication_kind": "public source repository",
   "repository_url": "https://github.com/ferhatcore/claude-codex-project-os",
   "hosted_ci": {
-    "url": "https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43015330417",
+    "url": "https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43018536749",
     "status": "completed",
     "conclusion": "success",
-    "head_sha": "534270662e8db5ea006d72426ba4144e86330b9e",
+    "head_sha": "1559874afe3f45a04efe6a02e5774919ae0a896f",
     "platforms": [
       "Windows",
       "Ubuntu"
@@ -155,8 +157,73 @@
     "codex_authenticated_bootstrap": "passed",
     "codex_generic_native_qa_delegation": "read only inspection completed",
     "codex_named_agent_selection": "not exposed by installed client",
-    "codex_full_build_flow": "blocked by effective read only tool policy",
+    "codex_full_build_flow": "desktop sequence passed; nested CLI write route remains blocked",
     "claude_authenticated_build_flow": "not run",
+    "evidence": "release/CODEX-CHECK.md",
+    "codex_desktop_build_flow": "passed",
+    "codex_cli_build_flow": "blocked: in-scope patches rejected as outside project; no bypass"
+  },
+  "codex_desktop_integration": {
+    "date": "2026-11-11",
+    "client": "Codex desktop",
+    "result": "passed for the observed disposable task sequence",
+    "role_tool": "generic collaboration.spawn_agent with full installed role instructions",
+    "named_custom_agent_selection": false,
+    "sequence": [
+      "PM scoped authority",
+      "independent baseline QA",
+      "tests-only Developer",
+      "fresh Developer continuation",
+      "independent candidate QA",
+      "read only Reviewer",
+      "PM completeness"
+    ],
+    "native_workers": 5,
+    "max_simultaneous_workers_observed": 1,
+    "missing_authority_refusal": "passed in separate authenticated CLI checkpoint",
+    "baseline": {
+      "suite_passed": 3,
+      "unimplemented_filters_rejected": 2
+    },
+    "test_first": {
+      "tests": 23,
+      "passed": 19,
+      "expected_failures": 4,
+      "skipped": 0
+    },
+    "fresh_developer": {
+      "tests_passed": 23,
+      "cli_variants": 15,
+      "saved_handoff_resumed": true,
+      "test_authoring_replayed": false
+    },
+    "independent_qa": {
+      "tests_passed": 23,
+      "cli_variants": 19,
+      "acceptance_criteria_passed": 6,
+      "skipped": 0
+    },
+    "review": {
+      "blocking_findings": 0,
+      "files_verified_unchanged": 57,
+      "files_changed": 0
+    },
+    "pm_verification": {
+      "cli_cases_passed": 7,
+      "suite_tests_passed": 23,
+      "workspace_files": 59,
+      "markdown_files": 46,
+      "validation_findings": 0
+    },
+    "fixture_unchanged": true,
+    "fixture_git_or_deployment_performed": false,
+    "effective_model_effort_usage": "unknown; inherited without override or upgrade",
+    "exercised_file_sha256": {
+      "repos/catalog/catalog.mjs": "1b5a7fd1ead14dcba486bd7e9ffdaf19d4a716b1a07287f24275084bc079da98",
+      "repos/catalog/catalog.test.mjs": "aac4808f6080bdba82593627e5db6e12211071b8cd2cedb02804cb6ffed48ac1",
+      "repos/catalog/README.md": "a01c1a6b6b561581252238ee5fb5265438e16c5b3edee737a46309555a0876c0",
+      "repos/catalog/data.json": "bbeb46b2a7f72f26e85eaefef9b26efe97da2eee3957b2994a57dc2a37a80ad2"
+    },
     "evidence": "release/CODEX-CHECK.md"
   }
 }

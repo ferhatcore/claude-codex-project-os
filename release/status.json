@@ -24,7 +24,7 @@
   "copyright_year": 2026,
   "license_evidence": "release/OWNER-DECISION.md \u2014 explicit MIT selection",
   "attribution_evidence": "release/LICENSING-AUDIT.md",
-  "smoke_test_blocker": "Complete authenticated build sequence pending for both clients; Codex bootstrap and read only delegation were observed.",
+  "smoke_test_blocker": "Authenticated Claude Code build sequence remains unrun. Codex desktop sequence completed; nested CLI write route remains blocked.",
   "publication_scope": "Public source repository at ferhatcore/claude-codex-project-os; no claim of a completed authenticated Claude test.",
   "repository_url": "https://github.com/ferhatcore/claude-codex-project-os",
   "published": true,
@@ -32,10 +32,10 @@
   "published_on": "2026-11-11",
   "default_branch": "main",
   "hosted_ci": {
-    "url": "https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43015330417",
+    "url": "https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43018536749",
     "status": "completed",
     "conclusion": "success",
-    "head_sha": "534270662e8db5ea006d72426ba4144e86330b9e",
+    "head_sha": "1559874afe3f45a04efe6a02e5774919ae0a896f",
     "platforms": [
       "Windows",
       "Ubuntu"
@@ -56,9 +56,16 @@
       "authenticated_bootstrap": true,
       "native_qa_inspection": true,
       "named_agent_selection": false,
-      "authenticated_build_flow": false,
-      "blocker": "Effective tool policy refused writes and QA test commands.",
-      "evidence": "release/CODEX-CHECK.md"
+      "authenticated_build_flow": true,
+      "blocker": "Nested CLI writes remain blocked; desktop sequence completed. Exact inherited model/effort and account usage are unknown.",
+      "evidence": "release/CODEX-CHECK.md",
+      "completed_client": "Codex desktop",
+      "independent_qa_tests_passed": 23,
+      "independent_qa_cli_cases": 19,
+      "independent_qa_criteria_passed": 6,
+      "fresh_context_recovery": true,
+      "review_blocking_findings": 0,
+      "nested_cli_authenticated_build_flow": false
     }
   }
 }

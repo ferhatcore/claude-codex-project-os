@@ -1,5 +1,9 @@
 # Changelog
 
+## Codex desktop integration test — 2026-11-11
+
+Completed the real disposable task sequence with baseline QA, tests-first development, a fresh Developer continuation, independent candidate QA, read only review and PM completeness. QA passed all 23 tests, 19 CLI cases and six criteria. The separate nested CLI write failure remains recorded. No stable release or fixture deployment was created.
+
 ## Repository rename — 2026-11-11
 
 The repository is now `ferhatcore/claude-codex-project-os`. Both clients remain in one project. Clone instructions and repository links use the new name; existing GitHub links redirect to it.

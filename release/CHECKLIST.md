@@ -9,7 +9,7 @@ The owner approved public source upload on 2026-11-11. The repository is availab
 3. Public overview, quickstart and repository metadata prepared.
 4. Source pushed to `main`.
 5. Private vulnerability reporting enabled.
-6. Windows and Ubuntu Node.js 22 checks passed in [GitHub Actions](https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43015330417).
+6. Windows and Ubuntu Node.js 22 checks passed in [GitHub Actions](https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43018536749).
 
 ## Before a stable release
 
