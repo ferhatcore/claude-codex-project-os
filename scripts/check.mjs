@@ -2,7 +2,7 @@ import { existsSync, lstatSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { distributionRoot, entriesForRuntime, requireNode, parseArgs, realRoot, walk, configErrors, markdownErrors, taskErrors, scanText, releaseErrors } from './lib.mjs';
-import { runtimeFileErrors, codexRoles, codexSkills } from './runtimes.mjs';
+import { runtimeFileErrors, codexRoles, codexSkills, claudeRoles, claudeSkills } from './runtimes.mjs';
 
 const workspaceFiles = ['README.md','START.md','CLAUDE.md','.project-os.json',
   'planning/flow.md','planning/roles.md','planning/board.md','planning/decisions.md',
@@ -19,12 +19,14 @@ export function validate(root = distributionRoot, { workspace = false, release =
   let workspaceConfig;
   if (workspace) try { workspaceConfig=JSON.parse(readFileSync(path.join(root,'.project-os.json'),'utf8')); } catch {}
   const required = workspace ? [...workspaceFiles.filter(f => f !== 'CLAUDE.md'), ...entriesForRuntime(workspaceConfig?.runtime)] : ['README.md','QUICKSTART.md','CONTRIBUTING.md','SECURITY.md',
-    'PROVENANCE.md','LICENSE-DECISION.md','CHANGELOG.md','.gitignore','.gitattributes',
+    'release/PROVENANCE.md','release/LICENSE-DECISION.md','CHANGELOG.md','.gitignore','.gitattributes',
     'docs/architecture.md','docs/workflows.md','docs/customization.md','docs/troubleshooting.md','docs/claude-code.md',
     'scripts/init.mjs','scripts/check.mjs','scripts/lib.mjs','scripts/system.test.mjs','scripts/smoke.mjs','scripts/smoke.test.mjs',
     'scripts/runtimes.mjs','scripts/runtimes.test.mjs','docs/codex.md',
     ...codexRoles.map(role=>`templates/runtimes/codex/.codex/agents/${role}.toml`),
     ...codexSkills.map(skill=>`templates/runtimes/codex/.agents/skills/${skill}/SKILL.md`),
+    ...claudeRoles.map(role=>`templates/runtimes/claude/.claude/agents/${role}.md`),
+    ...claudeSkills.map(skill=>`templates/runtimes/claude/.claude/skills/${skill}/SKILL.md`),
     'docs/authenticated-smoke.md','release/LICENSING-AUDIT.md','release/BLOCKERS.md',
     '.github/workflows/validate.yml','release/metadata.md','release/READINESS.md','release/status.json','release/CHECKLIST.md','release/v1.0.0.md','release/adoption.md',
     ...workspaceFiles.map(f => `templates/workspace/${f}`),

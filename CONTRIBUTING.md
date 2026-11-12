@@ -13,4 +13,4 @@ node --test scripts/system.test.mjs scripts/smoke.test.mjs scripts/runtimes.test
 
 If you change installation paths or templates, try the setup in a new directory too. Record the commands you ran and their results in the pull request. Add a regression test when a bug affects installer or validator behavior.
 
-Contributions are made under the [MIT License](LICENSE). Identify any third party material you add and preserve its notices. See [provenance](PROVENANCE.md) for the source history and [security reporting](SECURITY.md) for private reports.
+Contributions are made under the [MIT License](LICENSE). Identify any third party material you add and preserve its notices. See [provenance](release/PROVENANCE.md) for the source history and [security reporting](SECURITY.md) for private reports.

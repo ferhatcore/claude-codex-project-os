@@ -1,88 +1,100 @@
 # Project OS for Claude Code and Codex
 
-A project structure with task files, clear responsibilities and a separate QA step. Install it for Claude Code, Codex or both from this repository.
+**Turn your AI coding assistant into a small software team with approval gates and a memory that lives in files.**
 
-The PM keeps track of decisions, writes tasks and assigns work. A developer makes the change. QA checks the result against the task before it comes back for approval. Progress lives in files, so a new session can continue without starting the explanation again.
+You talk to one session, the PM. It writes each piece of work down as a task with checkable acceptance criteria, asks for your approval, hands the task to a Developer, then to an independent QA that runs the tests itself, and reports back. Everything is saved in plain Markdown files, so when you close the session and open a new one, it picks up exactly where it stopped.
 
-Both clients use the same planning directory, task files, decisions and repository rules. You can change clients between steps while keeping the project state in one place.
+It solves three everyday problems:
 
-## Choose your client
+| Problem | What Project OS does |
+|---|---|
+| The assistant forgets everything when the session ends | Board, tasks, decisions and a Hand-off note per task live in `planning/`; a new session reads them and continues |
+| It changes code you never approved | No code before you approve the task's scope; commits, pushes and deployments each need their own approval |
+| It marks its own work as done | QA is a separate role that runs the tests and checks every criterion; the Reviewer can only read |
 
-You need Node.js 22 or newer and the coding client you want to use. There are no npm packages to install.
+Claude Code and Codex use the same files, so you can switch clients between steps.
+
+## Quick start with Claude Code
+
+You need [Node.js 22+](https://nodejs.org) and [Claude Code](https://code.claude.com/docs/en/quickstart). Nothing else is installed.
 
 ```sh
 git clone https://github.com/ferhatcore/claude-codex-project-os.git
 cd claude-codex-project-os
+node scripts/init.mjs --target ../my-project --name "My Project"
+cd ../my-project
+claude
 ```
 
-For Claude Code:
+Then type `/project-os-start` and describe what you want to build. A typical first session:
 
-```sh
-node scripts/init.mjs --target ../claude-demo --example --runtime claude
+```text
+You:  /project-os-start
+PM:   New project, no repositories or tasks yet. What should we build first?
+You:  A small notes CLI in Node: add, list and delete notes, with tests.
+PM:   Drafted T-001 with four acceptance criteria (AC-1 … AC-4). Approve scope and code?
+You:  Approved. Code and tests only, no Git actions.
+PM:   Recorded. project-os-developer is implementing T-001 …
+      Developer handed over: 9 tests pass. project-os-qa is verifying …
+      QA: AC-1 to AC-4 pass with evidence. T-001 is done (not committed).
 ```
 
-For Codex:
+Close the session whenever you like. Next time run `claude` and type `/project-os-resume`: the PM reads the board and Hand-off notes and tells you what is done and what comes next.
 
-```sh
-node scripts/init.mjs --target ../codex-demo --example --runtime codex
-```
-
-For both clients in one workspace:
-
-```sh
-node scripts/init.mjs --target ../shared-demo --example --runtime both
-```
-
-Open the generated directory in your selected client and ask it to read `START.md`. In Codex you can also invoke `$project-os-start`.
-
-The example is a local reading list called Trailboard, with a small CLI, a handbook and a proposed status filter task. Try it from the generated workspace:
-
-```sh
-node repos/catalog/catalog.mjs
-node --test repos/catalog/catalog.test.mjs
-```
-
-For your own project, omit `--example` and set `--name "My Project"`. The destination must be new. The installer leaves existing repositories and global client settings alone. Older install commands without `--runtime` continue to select Claude Code.
-
-[Quickstart](QUICKSTART.md) covers the first session and connecting existing repositories.
+Want to look around first? Add `--example` to the install command to get Trailboard, a small reading-list project with one proposed task.
 
 ## What gets installed
 
-Claude Code receives `CLAUDE.md` instructions. Codex receives `AGENTS.md`, project skills and four role definitions for PM, Developer, QA and Reviewer. Selecting both installs both entry points with one shared set of planning files.
+A new folder (the installer never touches existing ones) containing:
 
-Codex uses the available native delegation tools. If a client cannot select a named role directly, the PM sends that role's full instructions in the delegated brief. Manual sessions are the fallback. The installer itself does not start agents or make a model request.
+```text
+CLAUDE.md                 rules for the PM session
+START.md                  first-session procedure
+.project-os.json          project settings: repositories, worker cap, model preferences
+.claude/agents/           project-os-developer, project-os-qa, project-os-reviewer (read-only)
+.claude/skills/           /project-os-start, /project-os-task, /project-os-qa, /project-os-resume
+planning/board.md         what is in progress
+planning/tasks/           one file per task: criteria, approvals, QA report, Hand-off
+planning/decisions.md     every approval, with date and wording
+```
 
-The generated `.project-os.json` records the selected runtime, repository list, worker cap and model preferences. Choose `lean`, `standard` or `heavy` for the worker cap. Model tiers inherit the active model until you map them to settings available in your account.
+Nothing is written to your global Claude or Codex settings, and permissions stay as you have them. Subagents are limited by their tool lists, but your normal permission prompts still apply.
+
+## Codex and both clients
+
+```sh
+node scripts/init.mjs --target ../my-project --runtime codex
+node scripts/init.mjs --target ../my-project --runtime both
+```
+
+Codex gets `AGENTS.md`, four role definitions in `.codex/agents` and the same four skills (`$project-os-start` and others). With `both`, the two clients share one planning folder. Only one writer works in a repository at a time, whichever client it uses. See the [Codex guide](docs/codex.md).
 
 ## How a task moves
 
 ```mermaid
 flowchart LR
-    H[Human: scope and approval] --> PM[PM: task and plan]
+    H[You: scope and approval] --> PM[PM: task and plan]
     PM --> D[Developer]
-    D --> S{Security review needed?}
-    S -->|yes| R[Security review]
-    S -->|no| Q[QA]
-    R -->|pass| Q
-    R -->|findings| D
+    D --> Q[QA]
     Q -->|findings| D
-    Q -->|criteria pass| C[PM: check completeness]
-    C --> A[Human: approve Git actions]
-    A --> P[Separate deployment decision]
+    Q -->|all criteria pass| C[PM: completeness check]
+    C --> A[You: approve Git actions]
 ```
 
-A task names its repository, scope, branch, acceptance criteria and permissions. The working session records what changed, what it checked and where to resume. QA verifies each criterion independently. If scope changes, the task changes first.
+QA can send work back to the Developer twice. A third attempt needs a new plan and your approval. Risky changes also get a security review and the read-only Reviewer. "Done" means verified, not committed or deployed.
 
-Security and QA share a limit of two failed review cycles. A third cycle needs a new plan and human approval. Only one writer works in a repository at a time, including when switching between Claude Code and Codex. Code approval does not also approve a commit, push or deployment.
+## Use it with existing code
 
-## Inside the repository
+Install a new workspace, then tell the PM where your repositories are during `/project-os-start`. It adds them to `.project-os.json` and proposes repository rules for your review. Your repositories keep their current files. See the [quickstart](QUICKSTART.md) and the [customization guide](docs/customization.md).
 
-1. [Workspace templates](templates/workspace/README.md) for tasks, decisions, QA and reviews.
-2. [Repository rules](templates/repository/README.md) for architecture, conventions, testing and delivery.
-3. [Trailboard](examples/trailboard/README.md), a complete local example with two repository folders.
-4. [Codex setup](docs/codex.md) and [Claude Code notes](docs/claude-code.md).
-5. [Workflows](docs/workflows.md), [customization](docs/customization.md) and [recovery](docs/troubleshooting.md).
-6. [Helper scripts](scripts/README.md), [contribution guide](CONTRIBUTING.md) and [security policy](SECURITY.md).
+## More
+
+1. [Quickstart](QUICKSTART.md): first session step by step, and connecting existing repositories.
+2. [Claude Code notes](docs/claude-code.md) and [Codex setup](docs/codex.md).
+3. [Workflows](docs/workflows.md), [customization](docs/customization.md) and [troubleshooting](docs/troubleshooting.md).
+4. [Workspace templates](templates/workspace/README.md) and [repository rules](templates/repository/README.md).
+5. [Test report](TEST-REPORT.md): what was tried with the real clients and what still fails.
+6. [Contributing](CONTRIBUTING.md), [security](SECURITY.md) and [release records](release/READINESS.md).
 
 ## Run the checks
 
@@ -92,12 +104,8 @@ node --test scripts/system.test.mjs scripts/smoke.test.mjs scripts/runtimes.test
 node --test examples/trailboard/repos/catalog/catalog.test.mjs
 ```
 
-The checks cover all three runtime choices, all three worker profiles, shared task state, generated agent files, installation refusals, configuration and fixture behavior. GitHub Actions runs the suites on Windows and Linux with Node.js 22.
-
-The [Codex verification record](release/CODEX-CHECK.md) lists the client sessions, task results and remaining limits.
+They cover all runtime and profile choices, the installed agents and skills, shared task state, installation refusals and the example. GitHub Actions runs them on Windows and Linux with Node.js 22. They do not start a model.
 
 ## License
 
-[MIT](LICENSE). Copyright (c) 2026 Ferhat Kosger.
-
-An independent project for Claude Code and Codex.
+[MIT](LICENSE). Copyright (c) 2026 Ferhat Kosger. An independent project; not affiliated with Anthropic or OpenAI.

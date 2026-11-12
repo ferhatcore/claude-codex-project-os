@@ -26,7 +26,7 @@
 - [ ] AC-1: {{ACTION_AND_VISIBLE_RESULT}}
 - [ ] AC-2: {{REGRESSION_OR_FAILURE_BEHAVIOR}}
 
-Each criterion needs a QA verdict and evidence. Add a dated/source-labelled CHANGED line to the criterion when its meaning changes. Reassess approvals and prior verification for affected changes.
+Keep the exact `- [ ] AC-n: text` line shape; see planning/formats.md for field values and the QA table. Each criterion needs a QA verdict and evidence. Add a dated/source-labelled CHANGED line to the criterion when its meaning changes. Reassess approvals and prior verification for affected changes.
 
 ## Verification plan
 
