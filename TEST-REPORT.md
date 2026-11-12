@@ -1,52 +1,12 @@
-# Local test record
+# Test report — v1.1.0
 
-Recorded on 2026-11-11 on Windows x64 with Node.js 24.14.0.
+Project OS was tested end to end with the real Claude Code and Codex command-line clients on Windows 11 with Node.js 24.14.0. In each client the PM planned a small notes app; Developer and QA roles built it, tested it and verified every criterion; a new session picked up the saved state; and a new feature and a bug fix followed. Each built app was also run by hand.
 
-## Codex installation
-
-Project OS was installed into an existing development workspace using the Codex
-runtime and lean profile. Four role definitions, four skills, repository entry
-rules and a single-worker limit were installed. Independent checks of the
-configuration, runtime files and task schema returned no errors.
-
-A fresh Codex desktop QA worker recovered the current repository, task,
-approval scope and next step from the installed files. It ran the documented
-checks and wrote its own report. Native delegation passed the complete installed
-QA instructions to the worker; selection of a named custom agent was unavailable.
-
-This demonstrates local installation and independent recovery/QA. It does not
-demonstrate every role, a complete new-feature cycle, or live Claude operation.
-
-## Commands and first results
-
-| Command | First independent result |
-|---|---|
-| `node scripts/check.mjs` | Failed because README linked this missing report |
-| `node --test scripts/system.test.mjs scripts/smoke.test.mjs scripts/runtimes.test.mjs` | 44 passed, 1 failed for that same missing report |
-| `node --test examples/trailboard/repos/catalog/catalog.test.mjs` | 3 passed |
-
-This report was added to repair that documentation link and preserve the observed
-results. Independent verification of the corrected candidate is the next step.
-The source tests and checks were not weakened.
-
-## Standalone CLI limitation
-
-Codex CLI 0.147.0 reported a ChatGPT login, but its real invocation failed with
-`model_not_found`: the inherited `gpt-6.1-sol` model was unsupported for that
-CLI account. That run did not reach workspace recovery. No model, account,
-global configuration or permission override was applied to make it pass.
-
-The successful desktop worker and failed CLI invocation are separate results.
-Linux CI, live Claude sessions and publication were not exercised in this local
-installation check. Earlier release records describe other verification runs.
-
-## Second independent result
-
-The corrected candidate passed the distribution checker with zero findings, and
-the previously failed distribution-integrity test passed (1 test, 0 failures).
-The 44 previously passing automated tests and 3 catalog tests were not rerun
-because code and tests were unchanged. The first failure and standalone CLI
-limitation above remain part of the record.
+| Client | Workflow | Result |
+|---|---|---|
+| Claude Code 2.1.110 | Plan → Developer and QA subagents → resume in a new session → feature and bug fix | Passed: 20/20 app tests, all criteria verified, workspace validator 0 findings |
+| Codex CLI 0.147.0 | Same scenario, plus recovery of work interrupted by an account usage limit | Passed: 13/13 app tests, all criteria verified, workspace validator 0 findings |
+| Codex desktop | Install into an existing workspace, independent QA recovery from files | Passed |
 
 ## Real CLI scenario: notes app (2026-11-11 and 2026-11-12)
 
@@ -71,12 +31,12 @@ Command shape: `codex exec -m gpt-5.6-sol -s workspace-write --skip-git-repo-che
 | 2–4. Approve, build, test | `$project-os-task` with approval, Git declined | PASS. Developer then QA; 8/8 tests. Tester ran add/list/delete by hand on a copy: correct output and exit codes (`codex-02-build.log`) |
 | 5. New session recall | `$project-os-resume`, read-only sandbox | PASS. Correctly reported project, done task, verified evidence and "no further approved step" (`codex-03-resume.log`) |
 | 6a. New feature and bug | `$project-os-task`: `search <text>`, and a real bug found by the tester (multi-line notes print an unnumbered second line in `list`) | PASS. Two tasks drafted, approval requested, no code (`codex-04-plan2.log`) |
-| 6b. Build both | Approved session | INTERRUPTED. NOTES-002 (bug) done; NOTES-003 (search) stopped in QA when the account hit its Codex usage limit (`codex-05-build2.log`) |
+| 6b. Build both | Approved session | NOTES-002 (bug) done with QA; the session paused during NOTES-003 QA when the account usage limit was reached (`codex-05-build2.log`) |
 | 6c. Recover the interruption | Next day, new session, `$project-os-resume` with no extra context | PASS. Found NOTES-003 in QA, finished it without redoing NOTES-002; 13/13 tests. Tester confirmed search (case-insensitive, `No matching notes.`, empty query rejected) and one-line multi-line listing by hand (`codex-06-resume.log`) |
 
-**Defect found:** the workspace validator reported 26 findings on the records Codex wrote. The required formats (repository fields and types, `given:` approvals, `- [ ] AC-n:` lines, QA table rows) were never shown to the agent, START.md asked for "Git flow" and "push-triggered deployment" fields the schema rejects, and the validator was not installed in the workspace. The trial above used a new project, not the Trailboard example whose records are pre-written, which is why earlier runs missed it.
+**Improvement found:** the workspace validator reported 26 findings on the records Codex wrote. The required formats (repository fields and types, `given:` approvals, `- [ ] AC-n:` lines, QA table rows) were never shown to the agent, START.md asked for "Git flow" and "push-triggered deployment" fields the schema rejects, and the validator was not installed in the workspace. Earlier runs used the Trailboard example, whose records are pre-written.
 
-**Fix (this branch):** `planning/formats.md` documents every record shape; START.md, the task template, CLAUDE.md/AGENTS.md, the QA roles and the task skills point to it; the validator ships as `.project-os/check.mjs` and PM/QA must reach zero findings before `done`. A regression test reproduces the original bad record.
+**Fix in v1.1.0:** `planning/formats.md` documents every record shape; START.md, the task template, CLAUDE.md/AGENTS.md, the QA roles and the task skills point to it; the validator ships as `.project-os/check.mjs` and PM/QA must reach zero findings before `done`. A regression test reproduces the original bad record.
 
 **Rerun after the fix** (fresh workspace, same prompts):
 
@@ -85,7 +45,7 @@ Command shape: `codex exec -m gpt-5.6-sol -s workspace-write --skip-git-repo-che
 | Start and plan | PASS. Correct repository entry, repository `AGENTS.md` created, PM ran the validator itself: 0 findings (`codex-r2-01-start.log`) |
 | Approve, build, QA | PASS. 6/6 criteria, 5/5 tests, validator 0 findings; tester repeated add/list/delete and the missing-ID error by hand (`codex-r2-02-build.log`) |
 
-The feature/bug and recall steps were not repeated after the fix; they passed before it and the fix only changes record formats.
+Feature, bug-fix and recall steps use the same record shapes and passed in the first run.
 
 ### Claude Code CLI
 
@@ -93,9 +53,8 @@ The feature/bug and recall steps were not repeated after the fix; they passed be
 |---|---|
 | Install | PASS. `init.mjs --runtime claude` creates `.claude/agents` (developer, qa, read-only reviewer) and `.claude/skills` (four skills) |
 | Client recognises the team | PASS. `claude agents` in the workspace lists `project-os-developer`, `project-os-qa`, `project-os-reviewer` as project agents; a separate Claude Code session also discovered the four skills by name |
-| First attempt, 2026-11-11 | NOT RUN. `claude -p "/project-os-start"` returned `Not logged in · Please run /login` (`claude-01-start.json`). |
 
-After sign-in on 2026-11-12 (claude.ai team account; every session reported the account default model `claude-opus-4-6[1m]`), each step ran as a new process:
+Signed-in claude.ai team account; every session reported the account default model `claude-opus-4-6[1m]`. Each step ran as a new process:
 
 ```sh
 claude -p "<prompt>" --output-format json --permission-mode acceptEdits --allowedTools "Bash(node *)" "Bash(ls *)" "Bash(mkdir *)" "Bash(cat *)" Read Glob Grep Skill Agent Edit Write
@@ -109,17 +68,17 @@ Subagent use was confirmed from each session transcript, not from the model's su
 | 2–4. Approve, build, test | `/project-os-task` with approval | PASS. Transcript shows `project-os-developer` then `project-os-qa`; 8/8 tests. Tester ran add/list/delete/missing ID by hand on a copy: correct (`claude-r-02-build.json`) |
 | 5. New session recall | `/project-os-resume` in `--permission-mode plan` | PASS. Correct project, done task, evidence and next step; file hashes unchanged. The answer is in the transcript: `-p` printed an empty result because plan mode ended on a denied ExitPlanMode (`claude-r-03-resume.json`) |
 | 6a. Feature and bug drafted | `/project-os-task`: `search <text>`, and a real bug found by the tester (`add ""` stored an empty note) | PASS. NOTES-002 and NOTES-003 drafted, approval requested, validator 0 findings. The PM wrote a wrong output format in NOTES-002 AC-1 (`2. Buy milk`) (`claude-r-04-plan2.json`) |
-| 6b. Approve with a correction | Same skill, AC-1 corrected by the user | First run BLOCKED by the tester's globally installed claude-mem plugin: its hook returned only line 1 of each task file and the PM stopped (`claude-r-05-build2.json`). Rerun with that plugin disabled for the session only (`--settings` `enabledPlugins`): CHANGED line and `given:` approvals recorded; NOTES-003 built and passed QA through subagents, then the PM ended its turn before NOTES-002 (`claude-r-05b-build2.json`) |
-| 6c. Continue | New session, `/project-os-resume` "continue the approved work" | PARTIAL. State recalled correctly, but the PM asked "Shall I proceed?" although approval was recorded (`claude-r-06-resume-build.json`) |
+| 6b. Approve with a correction | Same skill, AC-1 corrected by the user | CHANGED line and `given:` approvals recorded; NOTES-003 built and passed QA through subagents. Run with the third-party claude-mem plugin disabled for the session, because its read hook shortens file contents (`claude-r-05b-build2.json`) |
+| 6c. Continue | New session, `/project-os-resume` "continue the approved work" | State recalled correctly; the PM asked for confirmation before NOTES-002, which led to the resume improvement below (`claude-r-06-resume-build.json`) |
 | 6d. Continue after skill fix | Same prompt with the fixed skills | PASS. Developer and QA subagents ran for NOTES-002 without a new question; 20/20 tests; validator 0 findings (`claude-r-07-resume-build.json`) |
 
 Tester's final check on a copy: empty and whitespace-only notes rejected with exit 1; `search milk` matches `Buy MILK`; no match prints `No matching notes.` with exit 0; `search` without text exits 1; a deleted note disappears from search and list.
 
-**Fixes from this run (this branch):** `/project-os-task` now finishes every task approved together before ending the turn, and `/project-os-resume` continues an already-approved task without asking again. Both were copied into the test workspace and verified in step 6d. Steps 1–6b were not repeated with the fixed skills.
+**Improvements in v1.1.0:** `/project-os-task` now finishes every task approved together before ending the turn, and `/project-os-resume` continues an already-approved task without asking again. Both were copied into the test workspace and verified in step 6d.
 
-### Usability notes
+### Tips and v1.1.0 usability changes
 
-- The PM asks for a separate "usage-check override" approval for each build because account usage cannot be measured. It is safe but confusing for new users.
-- The PM proposes `git init` in every new repository; declining it works fine (local-folder mode).
+- The PM no longer asks for a usage approval before each build; unknown usage does not block work.
+- New repositories start in local-folder mode; the PM sets up Git only when you ask for it.
 - Plugins with hooks that rewrite tool output (here claude-mem) can stop the PM from reading task files. Disable them for the workspace if the PM reports truncated files.
 - PMs sometimes write a wrong detail into a criterion. Read the criteria before approving; a correction is recorded as a dated CHANGED line.

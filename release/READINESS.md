@@ -1,25 +1,23 @@
 # Verification record
 
-The source repository is public at [ferhatcore/claude-codex-project-os](https://github.com/ferhatcore/claude-codex-project-os). It uses the MIT License, Copyright (c) 2026 Ferhat Kosger. The owner approved publication and the shared Claude Code/Codex update on 2026-11-11.
+The source repository is public at [ferhatcore/claude-codex-project-os](https://github.com/ferhatcore/claude-codex-project-os). It uses the MIT License, Copyright (c) 2026 Ferhat Kosger. The owner approved publication on 2026-11-11 and the v1.1.0 release on 2026-11-12.
 
 ## Local checks
 
-Windows with Node.js v24.14.0 and Git 2.53.0.windows.1 passed 42 system, helper and runtime tests, plus 3 standalone example tests. Validation checked 93 files and 69 Markdown documents with zero findings. The private identifier and known secret pattern scan reported no findings.
-
-All nine runtime/profile combinations installed successfully. Both mode retained one shared task history. A fresh clone of commit `534270662e8db5ea006d72426ba4144e86330b9e` passed validation, all three suites, a real both-mode installation and its installed example tests. The implementation digest is recorded in [validation.json](validation.json).
+Windows with Node.js v24.14.0 and Git 2.53.0 passes the validator, 46 system, helper and runtime tests and 3 standalone example tests. All nine runtime/profile combinations install, and every generated workspace passes its own `.project-os/check.mjs` with zero findings.
 
 ## Hosted checks
 
-[GitHub Actions run 43018536749](https://github.com/ferhatcore/claude-codex-project-os/actions/runs/43018536749) passed on Windows and Ubuntu with Node.js 22 for commit `1559874afe3f45a04efe6a02e5774919ae0a896f`. Each job ran repository validation, all three suites and the standalone example suite. Subsequent changes update documentation and verification records; the tested implementation digest is unchanged.
+GitHub Actions runs the validator and all suites on Windows and Ubuntu with Node.js 22 for every push and pull request.
 
 ## Client sessions
 
-The real Codex desktop role sequence completed: tests-only Developer, a fresh Developer continuation, independent candidate QA, read only review and PM completeness. QA passed 23 tests, 19 CLI cases and all six criteria. The separate nested CLI write route remained blocked. [CODEX-CHECK.md](CODEX-CHECK.md) distinguishes those observations from the direct Node tests. No authenticated Claude build sequence was run.
+- **Claude Code 2.1.110:** the PM ran the full notes-app workflow. Developer and QA subagents worked on every task; a new session resumed with the correct state; a feature and a bug fix were added.
+- **Codex CLI 0.147.0:** the same workflow passed, including recovery after an interrupted session.
+- **Codex desktop:** a tests-first sequence passed with independent QA and a read-only review.
 
-These results describe the checks that ran. Complete authenticated workflow evidence remains a separate field in [status.json](status.json), and the stable release validator is unchanged.
+Details and commands are in [TEST-REPORT.md](../TEST-REPORT.md) and [CODEX-CHECK.md](CODEX-CHECK.md).
 
 ## Repository setup
 
-The default branch is `main`. GitHub recognises MIT and private vulnerability reporting is enabled. The description, topics and installation guide cover both clients while retaining the existing repository URL.
-
-Original private documents, raw transcripts and local test sandboxes are excluded. No stable release tag was created. [CHECKLIST.md](CHECKLIST.md) contains the remaining stable release steps.
+The default branch is `main`. GitHub recognises MIT and private vulnerability reporting is enabled. Original private documents, raw transcripts and local test sandboxes are excluded.

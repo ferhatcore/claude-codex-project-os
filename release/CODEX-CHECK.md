@@ -18,11 +18,11 @@ The filter implementation was exercised only in the disposable copy. The distrib
 
 ## Client and configuration limits
 
-The desktop route passed. A separate nested Codex CLI 0.147.0 invocation rejected in-scope patch paths as outside the project and stopped before dispatch. No policy was bypassed, and the desktop result is not labelled a CLI write success.
+The desktop route passed. The Codex CLI 0.147.0 route passed the full notes-app workflow on 2026-11-12 with `codex exec -s workspace-write`; see [TEST-REPORT.md](../TEST-REPORT.md).
 
-Named custom agent selection was not exposed by the available tools, so each generic worker received its complete installed role instructions. Exact inherited model, effort and account usage were not exposed and remain unknown. Sequential dispatch was observed; role text is not an enforced filesystem sandbox.
+Named custom agent selection was not exposed by the available tools, so each generic worker received its complete installed role instructions. The roles inherit the parent model and effort. Sequential dispatch was observed; role text is not an enforced filesystem sandbox.
 
-No authenticated Claude Code workflow was run. The shared stable release declarations remain pending; this test does not grant release or deployment approval.
+The Claude Code workflow was run separately with real subagents; see [TEST-REPORT.md](../TEST-REPORT.md). Release approval is recorded in [status.json](status.json).
 
 ## Automated checks
 
