@@ -30,7 +30,8 @@ No paid services, external messages, publication, contract changes or deployment
 Keep normal client permission controls enabled; prompt restrictions do not enforce access control.
 Developer/QA sessions do not commit, push, merge, tag or delete branches.
 The nominated Git owner performs approved operations only, after confirming worker/lane state.
-Branch creation or switching also needs an applicable local Git approval; check for uncommitted work first.
+New repositories use local-folder mode; never propose `git init` or a branch unless the user asks for Git.
+Branch creation or switching needs an applicable local Git approval; check for uncommitted work first.
 Never discard other tasks' work. Do not impersonate an author or remove required attribution.
 No automatic dependency upgrades; propose unrelated changes separately.
 
@@ -45,7 +46,7 @@ Before a long command, save a recoverable hand-off. Do not clear a busy worker.
 After each step, update task, board and model/usage log; notify PM via the verified adapter or human.
 No polling loops, scheduled jobs or dashboard services are installed. Work advances on observed events.
 At restart read board, ranked requests, pending approvals and open hand-offs; reconcile actual worker state.
-Do not repeat a completed step. Resume only after checking approval, usage and dependencies.
+Do not repeat a completed step. Resume only after checking approval and dependencies.
 
 ## Quality and context
 

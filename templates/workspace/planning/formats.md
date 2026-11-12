@@ -29,7 +29,7 @@ Each item in `repositories` has exactly these nine fields and no others:
 - `id`: lowercase letters, digits and hyphens, starting with a letter.
 - `path`: relative path inside the workspace; the folder must exist.
 - `type`: one of `backend-api`, `service`, `web`, `admin`, `landing`, `mobile`, `infra`, `data`, `library`, `cli`, `tests`, `docs`, `external`.
-- `owner`, `branch`, `test_command`, `smoke_command`: nonempty text. Use `none (local folder mode)` when there is no Git branch.
+- `owner`, `branch`, `test_command`, `smoke_command`: nonempty text. New repositories start in local-folder mode: use `none (local folder mode)` and do not propose `git init`. Set up Git only when the user asks for it.
 - `push_deploys`, `external`: `true` or `false`, never text.
 
 Put Git flow, deployment notes and other facts in `planning/decisions.md`, not in extra fields.

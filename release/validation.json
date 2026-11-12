@@ -37,13 +37,13 @@
     "executed": true,
     "negative_filter_failures_reproduced": true,
     "fixture_unchanged": true,
-    "authenticated_sessions_proven": false
+    "authenticated_sessions_proven": true
   },
   "authentication": {
     "claude": {
-      "loggedIn": false,
-      "source": "previous claude auth status --json check",
-      "model_requests_executed": 0
+      "loggedIn": true,
+      "source": "claude auth status --json on 2026-11-12 and real CLI sessions",
+      "model_requests_executed": true
     },
     "codex": {
       "loggedIn": true,
@@ -51,7 +51,7 @@
       "model_requests_executed": true,
       "full_build_flow_completed": true,
       "completed_client": "Codex desktop",
-      "nested_cli_build_flow_completed": false
+      "nested_cli_build_flow_completed": true
     }
   },
   "isolated_profiles": [
@@ -157,11 +157,11 @@
     "codex_authenticated_bootstrap": "passed",
     "codex_generic_native_qa_delegation": "read only inspection completed",
     "codex_named_agent_selection": "not exposed by installed client",
-    "codex_full_build_flow": "desktop sequence passed; nested CLI write route remains blocked",
-    "claude_authenticated_build_flow": "not run",
+    "codex_full_build_flow": "passed in Codex desktop and Codex CLI",
+    "claude_authenticated_build_flow": "passed; see TEST-REPORT.md",
     "evidence": "release/CODEX-CHECK.md",
     "codex_desktop_build_flow": "passed",
-    "codex_cli_build_flow": "blocked: in-scope patches rejected as outside project; no bypass"
+    "codex_cli_build_flow": "passed; see TEST-REPORT.md"
   },
   "codex_desktop_integration": {
     "date": "2026-11-11",

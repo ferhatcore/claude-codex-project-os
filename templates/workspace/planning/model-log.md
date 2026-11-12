@@ -14,7 +14,7 @@ Configuration contains preferred selector/effort mappings, initially `inherit`. 
 | Date/time + zone | Observer/tool | Window and reset | Observed percentage or amount | Scope | Fresh until | Override scope/ref |
 |---|---|---|---|---|---|---|
 
-No observations exist at setup. Percentages are not dollar spend and a before/after delta may include other account activity. Never label an estimate measured. Use configured freshness and thresholds; unknown/stale observations block dispatch unless the human grants a bounded override.
+No observations exist at setup. Percentages are not dollar spend and a before/after delta may include other account activity. Never label an estimate measured. Use configured freshness and thresholds; unknown usage does not block dispatch and needs no override.
 
 ## Advanced review measurement
 
