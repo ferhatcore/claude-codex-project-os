@@ -5,7 +5,8 @@
 1. Claude installs now include the team: `project-os-developer`, `project-os-qa` and a read-only `project-os-reviewer` in `.claude/agents`, plus `/project-os-start`, `/project-os-task`, `/project-os-qa` and `/project-os-resume` skills.
 2. New `planning/formats.md` documents the exact repository, task, criterion and QA record shapes; the validator now ships in every workspace as `.project-os/check.mjs`. Fixes PM-written records failing validation in new projects.
 3. README rewritten around what the kit does and a three-step Claude start. Internal provenance and licence records moved under `release/`.
-4. [TEST-REPORT.md](TEST-REPORT.md) records the real Codex CLI notes-app scenario and the Claude steps that could not run without sign-in.
+4. [TEST-REPORT.md](TEST-REPORT.md) records the real Claude Code and Codex CLI notes-app scenarios.
+5. `/project-os-task` finishes all tasks approved together; `/project-os-resume` continues already-approved work without asking again.
 
 ## Codex desktop integration test — 2026-11-11
 

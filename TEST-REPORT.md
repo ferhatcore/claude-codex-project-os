@@ -93,9 +93,33 @@ The feature/bug and recall steps were not repeated after the fix; they passed be
 |---|---|
 | Install | PASS. `init.mjs --runtime claude` creates `.claude/agents` (developer, qa, read-only reviewer) and `.claude/skills` (four skills) |
 | Client recognises the team | PASS. `claude agents` in the workspace lists `project-os-developer`, `project-os-qa`, `project-os-reviewer` as project agents; a separate Claude Code session also discovered the four skills by name |
-| Steps 1–6 with a model | NOT RUN. `claude -p "/project-os-start"` returned `Not logged in · Please run /login` (`claude-01-start.json`); `claude auth status` reports `loggedIn: false`. The browser sign-in was postponed by the owner. No Claude result here is a pass. |
+| First attempt, 2026-11-11 | NOT RUN. `claude -p "/project-os-start"` returned `Not logged in · Please run /login` (`claude-01-start.json`). |
+
+After sign-in on 2026-11-12 (claude.ai team account; every session reported the account default model `claude-opus-4-6[1m]`), each step ran as a new process:
+
+```sh
+claude -p "<prompt>" --output-format json --permission-mode acceptEdits --allowedTools "Bash(node *)" "Bash(ls *)" "Bash(mkdir *)" "Bash(cat *)" Read Glob Grep Skill Agent Edit Write
+```
+
+Subagent use was confirmed from each session transcript, not from the model's summary.
+
+| Step | Session | Result |
+|---|---|---|
+| 1. Install and start | `init.mjs --runtime claude --name Notes`, then `/project-os-start` | PASS. Plan, NOTES-001 with 9 criteria, repository `CLAUDE.md`, approval request, no product code; validator 0 findings (`claude-r-01-start.json`) |
+| 2–4. Approve, build, test | `/project-os-task` with approval | PASS. Transcript shows `project-os-developer` then `project-os-qa`; 8/8 tests. Tester ran add/list/delete/missing ID by hand on a copy: correct (`claude-r-02-build.json`) |
+| 5. New session recall | `/project-os-resume` in `--permission-mode plan` | PASS. Correct project, done task, evidence and next step; file hashes unchanged. The answer is in the transcript: `-p` printed an empty result because plan mode ended on a denied ExitPlanMode (`claude-r-03-resume.json`) |
+| 6a. Feature and bug drafted | `/project-os-task`: `search <text>`, and a real bug found by the tester (`add ""` stored an empty note) | PASS. NOTES-002 and NOTES-003 drafted, approval requested, validator 0 findings. The PM wrote a wrong output format in NOTES-002 AC-1 (`2. Buy milk`) (`claude-r-04-plan2.json`) |
+| 6b. Approve with a correction | Same skill, AC-1 corrected by the user | First run BLOCKED by the tester's globally installed claude-mem plugin: its hook returned only line 1 of each task file and the PM stopped (`claude-r-05-build2.json`). Rerun with that plugin disabled for the session only (`--settings` `enabledPlugins`): CHANGED line and `given:` approvals recorded; NOTES-003 built and passed QA through subagents, then the PM ended its turn before NOTES-002 (`claude-r-05b-build2.json`) |
+| 6c. Continue | New session, `/project-os-resume` "continue the approved work" | PARTIAL. State recalled correctly, but the PM asked "Shall I proceed?" although approval was recorded (`claude-r-06-resume-build.json`) |
+| 6d. Continue after skill fix | Same prompt with the fixed skills | PASS. Developer and QA subagents ran for NOTES-002 without a new question; 20/20 tests; validator 0 findings (`claude-r-07-resume-build.json`) |
+
+Tester's final check on a copy: empty and whitespace-only notes rejected with exit 1; `search milk` matches `Buy MILK`; no match prints `No matching notes.` with exit 0; `search` without text exits 1; a deleted note disappears from search and list.
+
+**Fixes from this run (this branch):** `/project-os-task` now finishes every task approved together before ending the turn, and `/project-os-resume` continues an already-approved task without asking again. Both were copied into the test workspace and verified in step 6d. Steps 1–6b were not repeated with the fixed skills.
 
 ### Usability notes
 
 - The PM asks for a separate "usage-check override" approval for each build because account usage cannot be measured. It is safe but confusing for new users.
 - The PM proposes `git init` in every new repository; declining it works fine (local-folder mode).
+- Plugins with hooks that rewrite tool output (here claude-mem) can stop the PM from reading task files. Disable them for the workspace if the PM reports truncated files.
+- PMs sometimes write a wrong detail into a criterion. Read the criteria before approving; a correction is recorded as a dated CHANGED line.

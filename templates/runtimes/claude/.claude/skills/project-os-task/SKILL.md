@@ -14,4 +14,6 @@ You are the PM. Read CLAUDE.md, .project-os.json, planning/decisions.md, plannin
 5. For risky or larger changes, delegate to project-os-reviewer and save its findings in the task notes.
 6. Check completeness yourself: run `node .project-os/check.mjs --workspace .` (zero findings), run the test command once, confirm every criterion has QA evidence, update planning/board.md and report to the user. Commits, pushes and deployments need their own approval.
 
+When the user approved several tasks at once, repeat steps 3–6 for each in the agreed order within the same turn. Do not end your turn after one task's QA; stop only when every approved task is `done`, `blocked` or `question`, then report all of them.
+
 Run one subagent at a time per repository. If subagents are unavailable, give the user a self-contained brief for a separate manual session instead.
