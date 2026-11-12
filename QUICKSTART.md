@@ -29,7 +29,7 @@ Expected output is three fictional book titles. The baseline has three tests. Th
 
 ## 3. Start the PM
 
-Open `claude` or `codex` at the generated workspace root. For both mode, choose the client for the current step. Paste:
+Open `claude` or `codex` at the generated workspace root. For both mode, choose the client for the current step. In Claude Code type `/project-os-start`; in Codex type `$project-os-start`. Without skills, paste:
 
 ```text
 Read START.md and follow its bootstrap procedure. Act as PM.
@@ -56,9 +56,11 @@ PM records the real approval in the task and decisions file. Local-folder mode r
 
 ## 5. Developer, QA and review
 
-Claude Code can use separate manual sessions with a self-contained task brief. Codex can use the installed role definitions through its available delegation tools. If named role selection is absent, pass the corresponding TOML role instructions in the delegated brief; if no delegation is available, use separate manual sessions. Include workspace/task/rule paths and the stopping point.
+In Claude Code the PM delegates to the installed project subagents: `project-os-developer`, then `project-os-qa`, then the read-only `project-os-reviewer`, one at a time. `/project-os-task` runs that whole sequence after your approval. If subagents are unavailable, use separate manual sessions with a self-contained task brief. Codex can use the installed role definitions through its available delegation tools. If named role selection is absent, pass the corresponding TOML role instructions in the delegated brief; if no delegation is available, use separate manual sessions. Include workspace/task/rule paths and the stopping point.
 
 The developer implements only approved scope, runs tests and saves a handoff. QA waits until that lane is free, then checks each criterion and writes its own evidence. Reviewer returns findings to PM without editing the candidate. PM checks completeness before any Git decision.
+
+To continue later, start a new session and type `/project-os-resume` (Claude Code) or `$project-os-resume` (Codex). The PM rebuilds the state from the board and Hand-off blocks instead of from chat history.
 
 In both mode, there is still only one planning directory. Finish and save a step before switching clients. Never run a second writer in the same repository merely because it uses a different client.
 

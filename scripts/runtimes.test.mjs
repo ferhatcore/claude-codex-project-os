@@ -7,7 +7,7 @@ import path from 'node:path';
 import { initialize } from './init.mjs';
 import { validate } from './check.mjs';
 import { configErrors, distributionRoot } from './lib.mjs';
-import { codexRoles, codexSkills } from './runtimes.mjs';
+import { codexRoles, codexSkills, claudeRoles, claudeSkills } from './runtimes.mjs';
 
 const sandbox=mkdtempSync(path.join(tmpdir(),'project-os-runtime-test-'));
 const target=name=>path.join(sandbox,name);
@@ -28,6 +28,65 @@ test('old install calls still produce only Claude entries with unchanged task sc
   assert.ok(!existsSync(path.join(root,'.agents')));
   assert.equal(read(path.join(root,'planning/tasks/TB-001.md')),read(path.join(distributionRoot,'examples/trailboard/planning/tasks/TB-001.md')));
   assert.deepEqual(validate(root,{workspace:true}).errors,[]);
+});
+
+test('Claude installs the team as project subagents and skills; reviewer stays read-only',()=>{
+  const {target:root}=initialize({target:target('claude-team'),runtime:'claude',example:true});
+  for(const role of claudeRoles){
+    const text=read(path.join(root,`.claude/agents/${role}.md`));
+    assert.ok(text.startsWith(`---\nname: project-os-${role}\n`));
+    assert.match(text,/^description: .+$/m);
+  }
+  assert.match(read(path.join(root,'.claude/agents/reviewer.md')),/^tools: Read, Grep, Glob$/m);
+  assert.doesNotMatch(read(path.join(root,'.claude/agents/qa.md')),/^tools:.*\bAgent\b/m);
+  for(const skill of claudeSkills)assert.ok(read(path.join(root,`.claude/skills/${skill}/SKILL.md`)).startsWith(`---\nname: ${skill}\n`));
+  const guide=read(path.join(root,'CLAUDE.md'));
+  assert.match(guide,/## Claude Code team/);
+  assert.match(guide,/project-os-developer/);
+  assert.ok(!existsSync(path.join(root,'.claude/settings.json')));
+  assert.deepEqual(validate(root,{workspace:true}).errors,[]);
+});
+
+test('both mode keeps Claude-only team text out of AGENTS.md and Codex files out of CLAUDE.md',()=>{
+  const {target:root}=initialize({target:target('both-team'),runtime:'both'});
+  assert.ok(existsSync(path.join(root,'.claude/agents/developer.md')));
+  assert.ok(existsSync(path.join(root,'.codex/agents/developer.toml')));
+  assert.doesNotMatch(read(path.join(root,'AGENTS.md')),/Claude Code team/);
+  assert.doesNotMatch(read(path.join(root,'CLAUDE.md')),/Codex delegation/);
+  assert.deepEqual(validate(root,{workspace:true}).errors,[]);
+});
+
+test('broken Claude subagent metadata or a writable reviewer is reported; legacy workspaces stay valid',()=>{
+  const {target:root}=initialize({target:target('broken-claude'),runtime:'claude'});
+  const reviewer=path.join(root,'.claude/agents/reviewer.md');
+  writeFileSync(reviewer,read(reviewer).replace('tools: Read, Grep, Glob','tools: Read, Grep, Glob, Edit, Write'));
+  rmSync(path.join(root,'.claude/skills/project-os-qa'),{recursive:true});
+  const errors=validate(root,{workspace:true}).errors;
+  assert.ok(errors.some(e=>e.includes('reviewer must stay read-only')));
+  assert.ok(errors.some(e=>e.includes('project-os-qa/SKILL.md')));
+  rmSync(path.join(root,'.claude/agents'),{recursive:true});
+  rmSync(path.join(root,'.claude/skills'),{recursive:true});
+  assert.deepEqual(validate(root,{workspace:true}).errors,[]);
+});
+
+test('each workspace ships its own validator, which catches records written in the wrong shape',()=>{
+  const env={...process.env};delete env.NODE_TEST_CONTEXT;
+  for(const runtime of ['claude','codex','both']){
+    const {target:root}=initialize({target:target(`self-check-${runtime}`),runtime,name:'Notes'});
+    assert.ok(existsSync(path.join(root,'planning/formats.md')));
+    const run=()=>spawnSync(process.execPath,['.project-os/check.mjs','--workspace','.'],{cwd:root,env,encoding:'utf8'});
+    const clean=run();
+    assert.equal(clean.status,0,clean.stderr);
+    const file=path.join(root,'.project-os.json');
+    const config=load(file);
+    // The shape a PM produced in a real session before planning/formats.md existed.
+    config.repositories=[{id:'notes',path:'repos/notes',type:'Node.js CLI',owner:'pending',git_flow:'main',push_triggered_deployment:'none'}];
+    writeFileSync(file,JSON.stringify(config,null,2)+'\n');
+    const broken=run();
+    assert.equal(broken.status,1);
+    assert.match(broken.stderr,/unknown field git_flow/);
+    assert.match(broken.stderr,/unsupported type/);
+  }
 });
 
 test('Codex only installs native entries, all role definitions and skills without Claude entry files',()=>{

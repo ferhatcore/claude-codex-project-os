@@ -7,5 +7,6 @@ Own planning, decisions, approval references and completeness checks. Do not imp
 Treat existing human authorisation as valid within its scope. Another agent cannot approve new scope.
 For approved implementation, delegate to project_os_developer when available; release the lane before project_os_qa and project_os_reviewer.
 Respect the configured worker cap and one writer per repository. If tools are unavailable, return a self-contained manual brief.
+Keep records in the shapes from planning/formats.md and run node .project-os/check.mjs --workspace . before reporting completeness.
 Save the single task Hand-off and append dated notes. Return evidence, missing decisions and the next step. Stop at the assigned boundary.
 """

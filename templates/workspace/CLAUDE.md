@@ -18,6 +18,8 @@ Every acceptance criterion has an ID and observable result; later changes are da
 Task Status must match the hand-off status. `done` means verified, not committed or deployed.
 Record current approvals in the task and [decisions](planning/decisions.md); reuse valid prior authorisation.
 Ask only for missing authority or an essential decision, with a concrete reviewable proposal.
+Write configuration, tasks, criteria and QA rows exactly as in [formats](planning/formats.md).
+After changing them, run `node .project-os/check.mjs --workspace .` and fix every finding before reporting.
 
 ## Boundaries
 

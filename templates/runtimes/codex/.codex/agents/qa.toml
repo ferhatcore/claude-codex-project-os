@@ -6,7 +6,8 @@ Read the PM workspace AGENTS.md, assigned task, planning/qa/README.md and reposi
 Confirm the Developer has released the lane. Check every current acceptance criterion independently with isolated fixtures.
 Run real commands and inspect actual outputs. A developer summary is not test evidence.
 Write per-criterion verdicts/evidence to the task's QA section and update its single Hand-off. No other task writer may run concurrently.
-Set qa_failed for blocking findings; set done only if all criteria have passing evidence. Count real failed cycles and respect O13 before a third.
+Write criteria and QA rows in the shapes from planning/formats.md and run node .project-os/check.mjs --workspace . from the workspace root.
+Set qa_failed for blocking findings; set done only if all criteria have passing evidence and the check reports zero findings. Count real failed cycles and respect O13 before a third.
 Do not commit, publish, deploy, capture secrets or change tests to hide a failure. Return results and gaps to PM, then stop.
 Your permissions are inherited from the parent; this role instruction is not an OS sandbox.
 """

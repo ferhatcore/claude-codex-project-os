@@ -7,8 +7,8 @@ Reference check: 2026-11-11. Local CLI inspected: Claude Code 2.1.110, including
 | Capability | Baseline behavior | Optional integration requirement |
 |---|---|---|
 | Load root instructions | Start `claude` in PM workspace; explicitly read `START.md` | Normal CLAUDE.md discovery must remain enabled |
-| Named roles | Human opens separate terminals; PM records logical role names | Verify session/team creation and real IDs before claiming control |
-| Dispatch and results | Human carries task paths and short summaries | Native subagent/team tools available in that client, explicitly enabled |
+| Named roles | Project subagents in `.claude/agents`: project-os-developer, project-os-qa, project-os-reviewer (read-only tools) | Separate terminals when subagents are unavailable; PM records logical role names |
+| Dispatch and results | PM delegates one subagent at a time; results return to PM and are saved in the task file | Human carries task paths and summaries between manual sessions |
 | Context recovery | Files and self-contained resume briefs; human uses `/compact` or `/clear` | Never assume PM can clear another session |
 | Model/effort | Human chooses supported controls; record effective settings | Verify selector support; custom tier JSON is not native settings |
 | Usage | Human reads account/client usage and records timestamp/window | An actual telemetry tool with defined scope and freshness |
@@ -26,4 +26,4 @@ The original source referred to environment-specific session-control APIs. Their
 - [Costs and usage](https://code.claude.com/docs/en/costs): account/client usage controls and context management.
 - [Interactive commands](https://code.claude.com/docs/en/interactive-mode): current command behavior.
 
-CLAUDE.md is a steering mechanism; writing a restriction in a task is not equivalent to enforcing it in permissions. Keep normal permission checks active, review local hooks/settings, and use a disposable fixture environment for setup validation. No native settings, agents, hooks or MCP connections are silently installed by this kit.
+CLAUDE.md is a steering mechanism; writing a restriction in a task is not equivalent to enforcing it in permissions. Keep normal permission checks active, review local hooks/settings, and use a disposable fixture environment for setup validation. The kit installs only project-scoped subagents in `.claude/agents` and skills in `.claude/skills` (`/project-os-start`, `/project-os-task`, `/project-os-qa`, `/project-os-resume`). It installs no settings, permission rules, hooks or MCP connections and does not touch global configuration. Subagent tool lists narrow what a role can call; they are not an OS sandbox.

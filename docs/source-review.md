@@ -1,6 +1,6 @@
 # Source review and redesign
 
-All twelve supplied Markdown documents were read before release construction. Original wording, private examples and archive contents are not bundled. See [provenance](../PROVENANCE.md) for rights status and source inventory.
+All twelve supplied Markdown documents were read before release construction. Original wording, private examples and archive contents are not bundled. See [provenance](../release/PROVENANCE.md) for rights status and source inventory.
 
 ## What was reusable
 
