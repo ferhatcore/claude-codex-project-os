@@ -2,7 +2,7 @@
 
 ## A. Decisions
 
-Bootstrap must confirm project/repositories, model tier mappings, usage observation, first task scope and applicable code permission. Do not interpret an unanswered item as approval.
+Bootstrap must confirm project/repositories, model tier mappings, first task scope and applicable code permission. Do not interpret an unanswered item as approval.
 
 ## B. Human-only actions
 

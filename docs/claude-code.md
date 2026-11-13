@@ -1,6 +1,6 @@
 # Claude Code capabilities and references
 
-Reference check: 2026-11-11. Local CLI inspected: Claude Code 2.1.110, including version/help and structured authentication status. `claude auth status --json` reported `loggedIn: false`, so no model request or authenticated multi-session test was run. Online documentation can describe features newer than this local installation; verify your installed client before enabling an adapter. A [reproducible guided smoke test](authenticated-smoke.md) is included.
+Reference check: 2026-11-12 with Claude Code 2.1.110. The full workflow (PM, project-os-developer and project-os-qa subagents, resume in a new session) ran with a signed-in account; see [TEST-REPORT.md](../TEST-REPORT.md). Online documentation can describe features newer than this local installation; verify your installed client before enabling an adapter. A [reproducible guided smoke test](authenticated-smoke.md) is included.
 
 ## Baseline and optional adapters
 

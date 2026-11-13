@@ -30,7 +30,7 @@ When the stable release checks and intended release approval are complete, commi
 
 ```sh
 git add .
-git commit -m "Prepare v1.0.0 release"
+git commit -m "Prepare release"
 git push origin main
 gh run list --repo ferhatcore/claude-codex-project-os --workflow validate.yml
 ```

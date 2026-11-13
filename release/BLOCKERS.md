@@ -1,7 +1,13 @@
 # Release checks
 
-The source was published on 2026-11-11 at [ferhatcore/claude-codex-project-os](https://github.com/ferhatcore/claude-codex-project-os), following the owner's approval. MIT licensing, attribution review, repository setup and hosted Windows/Linux checks are complete.
+All release gates are complete for v1.1.0.
 
-The Codex desktop task sequence completed with independent QA and review; see [CODEX-CHECK.md](CODEX-CHECK.md). The nested CLI write path remains blocked. The stable release validator still requires genuine authenticated Claude session evidence. Its three remaining findings are `authenticated_smoke_test`, `smoke_evidence` and the candidate `state`. Offline results are not substituted for that evidence.
+| Gate | Result |
+|---|---|
+| Licence and attribution | MIT, Copyright (c) 2026 Ferhat Kosger; see [OWNER-DECISION.md](OWNER-DECISION.md) and [LICENSING-AUDIT.md](LICENSING-AUDIT.md) |
+| Public source | [ferhatcore/claude-codex-project-os](https://github.com/ferhatcore/claude-codex-project-os), published 2026-11-11 |
+| Automated checks | Validator, 46 system/helper/runtime tests and 3 example tests pass on Windows and Linux CI |
+| Claude Code session test | Full notes-app workflow with real subagents; see [TEST-REPORT.md](../TEST-REPORT.md) |
+| Codex session test | Full notes-app workflow in Codex CLI and the Codex desktop sequence; see [TEST-REPORT.md](../TEST-REPORT.md) and [CODEX-CHECK.md](CODEX-CHECK.md) |
 
-Use the [session test guide](../docs/authenticated-smoke.md) when completing that check. Record the observed result, then rerun the validator before creating a stable release tag.
+The machine-readable record is [status.json](status.json); `node scripts/check.mjs --release` passes.

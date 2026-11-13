@@ -27,13 +27,13 @@ Routine authorised analysis, document drafts, focused tests, in-scope fixes and 
 
 | Check | Before every new step, QA step or continuation |
 |---|---|
-| D1 | Fresh usage observation, budget band, time window and stop rules; unknown → hold or obtain bounded human override |
+| D1 | If a usage observation exists, apply its budget band and stop rules; if usage is unknown, proceed and rely on the client's own limits |
 | D2 | Exclusive advanced review inactive, or this is the approved review job |
 | D3 | Target worker confirmed idle, context recoverable, complete brief and resume state saved |
 | D4 | Lane free, dependencies complete, upstream changes closed, shared resource reserved |
 | D5 | Tier mapped to a supported effective model/effort; actual choice logged |
 
-No telemetry tool is assumed. With manual mode, the human confirms worker state and usage. Log observation source, timestamp, window and freshness. A human override specifies one bounded step, not unlimited permission. Model changes are best made at task boundaries after state is saved; effort changes depend on actual client support.
+No telemetry tool is assumed. With manual mode, the human confirms worker state. Log observation source, timestamp, window and freshness. Unknown usage is normal: do not ask the user for a usage observation or override before dispatch. Model changes are best made at task boundaries after state is saved; effort changes depend on actual client support.
 
 ## Lane rules G1–G6
 
@@ -70,7 +70,7 @@ PM normally starts with hand-off plus board, then reads criteria/findings/eviden
 
 Configured default percentages are policy, not provider account limits. For the observed short window: below yellow allow normal dispatch; yellow defer large work and advanced review; red start no new steps; stop threshold request safe stops and save state. Weekly priority threshold allows only explicitly requested urgent work; weekly stop threshold pauses all work, including scheduled jobs. The strictest applicable band wins. Never erase a session or interrupt a dangerous operation abruptly to hit a percentage.
 
-Unknown or stale usage blocks dispatch until a human observation or bounded override is recorded. No hard spending ceiling is enforced here. Record measured vs estimated usage separately and keep a reserve for QA/recovery. If a chosen model is unaffordable, reduce scope or wait; do not skip risk review.
+Bands apply only when the user or a tool has reported usage. Unknown usage never blocks dispatch and never needs a separate approval. No hard spending ceiling is enforced here. Record measured vs estimated usage separately and keep a reserve for QA/recovery. If a chosen model is unaffordable, reduce scope or wait; do not skip risk review.
 
 Context save/pause thresholds apply only when measured by the client. If unavailable, keep steps small and save after each event. Before compact/clear, persist board, requests, approvals and open hand-offs. Use a fresh worker context for unrelated work after saving the prior task. Do not clear during a failed QA fix cycle just for tidiness. PM uses the client's context controls manually when no verified API exists.
 

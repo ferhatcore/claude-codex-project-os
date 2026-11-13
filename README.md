@@ -93,7 +93,7 @@ Install a new workspace, then tell the PM where your repositories are during `/p
 2. [Claude Code notes](docs/claude-code.md) and [Codex setup](docs/codex.md).
 3. [Workflows](docs/workflows.md), [customization](docs/customization.md) and [troubleshooting](docs/troubleshooting.md).
 4. [Workspace templates](templates/workspace/README.md) and [repository rules](templates/repository/README.md).
-5. [Test report](TEST-REPORT.md): what was tried with the real clients and what still fails.
+5. [Test report](TEST-REPORT.md): the full workflow run with real Claude Code and Codex sessions.
 6. [Contributing](CONTRIBUTING.md), [security](SECURITY.md) and [release records](release/READINESS.md).
 
 ## Run the checks

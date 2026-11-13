@@ -10,4 +10,4 @@ On 2026-11-11, **Ferhat Kosger** identified himself as the project's creator and
 
 Licensing is resolved for this prepared repository. Original private source documents remain excluded. Future third-party additions must preserve their applicable notices and permissions under the contribution policy.
 
-The owner separately approved public source upload on 2026-11-11. Authenticated Claude testing remains a separate [release gate](BLOCKERS.md); a licence choice is not test evidence.
+The owner separately approved public source upload on 2026-11-11. Release testing is recorded separately in [BLOCKERS.md](BLOCKERS.md).

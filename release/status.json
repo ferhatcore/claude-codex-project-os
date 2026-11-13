@@ -1,31 +1,30 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "prepared_on": "2026-11-10",
-  "state": "candidate",
+  "state": "approved",
   "rights_confirmed": true,
-  "rights_evidence": "release/OWNER-DECISION.md \u2014 actual owner authorship and MIT decisions on 2026-11-11",
+  "rights_evidence": "release/OWNER-DECISION.md — actual owner authorship and MIT decisions on 2026-11-11",
   "license": "MIT",
   "attribution_reviewed": true,
-  "authenticated_smoke_test": false,
-  "smoke_evidence": null,
+  "authenticated_smoke_test": true,
+  "smoke_evidence": "TEST-REPORT.md — real Claude Code 2.1.110 and Codex CLI 0.147.0 notes-app scenarios, 2026-11-12",
   "publication_approved": true,
-  "approval_reference": "release/OWNER-DECISION.md \u2014 public source upload approved on 2026-11-11",
-  "reviewed_on": "2026-11-11",
+  "approval_reference": "release/OWNER-DECISION.md — public source upload approved on 2026-11-11",
+  "reviewed_on": "2026-11-12",
   "engineering_audit": "completed; see release/READINESS.md and release/validation.json",
   "licensing_audit": "release/LICENSING-AUDIT.md",
   "remaining_gate_actions": "release/BLOCKERS.md",
   "authentication_check": {
-    "checked_on": "2026-11-11",
+    "checked_on": "2026-11-12",
     "command": "claude auth status --json",
-    "loggedIn": false,
-    "model_requests_executed": 0
+    "loggedIn": true,
+    "model_requests_executed": true
   },
   "copyright_holder": "Ferhat Kosger",
   "copyright_year": 2026,
-  "license_evidence": "release/OWNER-DECISION.md \u2014 explicit MIT selection",
+  "license_evidence": "release/OWNER-DECISION.md — explicit MIT selection",
   "attribution_evidence": "release/LICENSING-AUDIT.md",
-  "smoke_test_blocker": "Authenticated Claude Code build sequence remains unrun. Codex desktop sequence completed; nested CLI write route remains blocked.",
-  "publication_scope": "Public source repository at ferhatcore/claude-codex-project-os; no claim of a completed authenticated Claude test.",
+  "publication_scope": "Public source repository at ferhatcore/claude-codex-project-os, release v1.1.0",
   "repository_url": "https://github.com/ferhatcore/claude-codex-project-os",
   "published": true,
   "publication_kind": "public source repository",
@@ -50,22 +49,23 @@
   ],
   "runtime_evidence": {
     "claude": {
-      "authenticated_build_flow": false
+      "authenticated_build_flow": true,
+      "subagents_confirmed": true,
+      "evidence": "TEST-REPORT.md"
     },
     "codex": {
       "authenticated_bootstrap": true,
       "native_qa_inspection": true,
       "named_agent_selection": false,
       "authenticated_build_flow": true,
-      "blocker": "Nested CLI writes remain blocked; desktop sequence completed. Exact inherited model/effort and account usage are unknown.",
-      "evidence": "release/CODEX-CHECK.md",
+      "evidence": "release/CODEX-CHECK.md; TEST-REPORT.md",
       "completed_client": "Codex desktop",
       "independent_qa_tests_passed": 23,
       "independent_qa_cli_cases": 19,
       "independent_qa_criteria_passed": 6,
       "fresh_context_recovery": true,
       "review_blocking_findings": 0,
-      "nested_cli_authenticated_build_flow": false
+      "nested_cli_authenticated_build_flow": true
     }
   }
 }
