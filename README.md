@@ -1,16 +1,16 @@
 # Project OS for Claude Code and Codex
 
-**Turn your AI coding assistant into a small software team with approval gates and a memory that lives in files.**
+Task planning, development and QA workflows for Claude Code and Codex, stored in Markdown files.
 
-You talk to one session, the PM. It writes each piece of work down as a task with checkable acceptance criteria, asks for your approval, hands the task to a Developer, then to an independent QA that runs the tests itself, and reports back. Everything is saved in plain Markdown files, so when you close the session and open a new one, it picks up exactly where it stopped.
+A PM session records tasks and acceptance criteria, requests approval, and assigns work to Developer and QA roles. QA runs checks separately. Saved task files let a new session review the previous state and continue.
 
-It solves three everyday problems:
+The workflow covers:
 
 | Problem | What Project OS does |
 |---|---|
-| The assistant forgets everything when the session ends | Board, tasks, decisions and a Hand-off note per task live in `planning/`; a new session reads them and continues |
-| It changes code you never approved | No code before you approve the task's scope; commits, pushes and deployments each need their own approval |
-| It marks its own work as done | QA is a separate role that runs the tests and checks every criterion; the Reviewer can only read |
+| Session context is lost | Board, tasks, decisions and a Hand-off note per task live in `planning/`; a new session reads them and continues |
+| Changes need scope approval | No code before you approve the task's scope; commits, pushes and deployments each need their own approval |
+| Work needs separate verification | QA is a separate role that runs the tests and checks every criterion; the Reviewer can only read |
 
 Claude Code and Codex use the same files, so you can switch clients between steps.
 
@@ -109,3 +109,4 @@ They cover all runtime and profile choices, the installed agents and skills, sha
 ## License
 
 [MIT](LICENSE). Copyright (c) 2026 Ferhat Kosger. An independent project; not affiliated with Anthropic or OpenAI.
+
